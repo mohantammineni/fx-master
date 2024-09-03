@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/367c17d1-af00-4d06-b1ef-c232c150efb8/resourceGroups/Fxmaster-web-react-production/providers/Microsoft.Web/sites/Fxmaster-Web-React-Production",
+    "appService.deploySubpath": "build"
+}
