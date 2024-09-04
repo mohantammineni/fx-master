@@ -1,17 +1,22 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function ChooseUs({heading="", content="", image = '/rect-choose-us-1.png' }) {
+function ChooseUs({
+  heading = '',
+  content = '',
+  image = '/rect-choose-us-1.png',
+  isCompact = false,
+}) {
   return (
-    <div className="flex-shrink-0 w-80 border border-blue-700 rounded-lg bg-blue-700 overflow-scroll">
-      <img
-        src={image}
-        alt="Exchange Rate Image"
-        className="w-full h-auto"
-      />
-      <div className="p-4 text-yellow-200">
-        <h3 className="text-lg text-[#F5A647]">{heading}:</h3>
-        <p className="pt-2 text-sm font-medium leading-relaxed">
+    <div
+      className={`${isCompact ? 'w-80' : 'w-full'} flex-shrink-0 border border-custom-ultramarine-blue rounded-lg bg-custom-cobolt-blue overflow-scroll`}
+    >
+      <img src={image} alt="Exchange Rate Image" className="w-full h-auto" />
+      <div className="p-4">
+        <h3 className="text-lg text-custom-yellow font-openSans font-bold">
+          {heading}:
+        </h3>
+        <p className="pt-2 text-sm font-medium leading-relaxed text-custom-maiza">
           {content}
         </p>
       </div>
@@ -23,6 +28,7 @@ ChooseUs.propTypes = {
   image: PropTypes.string,
   heading: PropTypes.string,
   content: PropTypes.string,
+  isCompact: PropTypes.bool,
 };
 
 export default ChooseUs;

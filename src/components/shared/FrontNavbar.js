@@ -1,51 +1,75 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { BsQuestion } from 'react-icons/bs';
 
 const FrontNavbar = () => {
+  const location = useLocation();
   return (
-    <nav className="bg-white text-white shadow py-3">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <Link to="/">
-              <img
-                className="h-auto w-[100px]"
-                src="/fx_logo.png"
-                alt="Logo"
-              />
-            </Link>
-          </div>
+    <header className="sticky top-0 w-full flex flex-col md:flex-row items-center justify-between pl-12 pr-12 pt-2 pb-2 bg-white shadow-md z-50">
+      {/* Logo */}
+      <div className="flex items-center md:mb-0">
+        <img src="/fx_logo.png" alt="FX Master Logo" className="h-10 mr-4" />
+      </div>
 
-          {/*<div className="hidden md:block bg-blue-700 rounded-4xl">*/}
-          {/*  <div className="flex items-baseline space-x-4 py-2 px-3">*/}
-          {/*    <Link to="#" className="text-slate-900 bg-yellow-400 px-3 py-2 rounded-4xl text-sm font-medium">*/}
-          {/*      Personal*/}
-          {/*    </Link>*/}
-          {/*    <Link to="#" className="text-yellow-400 px-3 py-2 rounded-md text-sm font-medium">*/}
-          {/*      Business*/}
-          {/*    </Link>*/}
-          {/*    <Link to="#" className="text-yellow-400 px-3 py-2 rounded-md text-sm font-medium">*/}
-          {/*      Fintech*/}
-          {/*    </Link>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+      {/* Navigation */}
+      <nav className="flex space-x-4 bg-custom-dark-blue py-2 px-4 rounded-full mb-2 md:mb-0">
+        <NavLink
+          to="/homepage"
+          className={`${
+            location.pathname === '/homepage'
+              ? 'bg-yellow-400 text-black'
+              : 'text-custom-yellow'
+          } font-semibold py-2 px-4 rounded-full`}
+        >
+          Personal
+        </NavLink>
+        <NavLink
+          to="/business"
+          className={`${
+            location.pathname === '/business'
+              ? 'bg-yellow-400 text-black'
+              : 'text-custom-yellow'
+          } font-semibold py-2 px-4 rounded-full`}
+        >
+          Business
+        </NavLink>
+        <NavLink
+          to="/fintech"
+          className={`${
+            location.pathname === '/fintech'
+              ? 'bg-yellow-400 text-black'
+              : 'text-custom-yellow'
+          } font-semibold py-2 px-4 rounded-full`}
+        >
+          Fintech
+        </NavLink>
+      </nav>
 
-          <div className="flex items-center space-x-4">
-            {/* <Link to="#" className="text-blue-700 text-sm font-light py-2 px-4 rounded-4xl flex items-center gap-2">
-              <BsQuestion className="bg-blue-600 rounded-full text-white text-lg" />
-              Help
-            </Link> */}
-            <Link to="/login" className="bg-blue-700 text-yellow-400 text-sm font-normal py-2 px-4 rounded-4xl">
-              Sign-in
-            </Link>
-            {/*<Link to="#" className="bg-white text-blue-700 text-sm font-light py-2 px-4 rounded-4xl border border-blue-700">*/}
-            {/*  Register*/}
-            {/*</Link>*/}
-          </div>
+      {/* Right Side */}
+      <div className="flex items-center space-x-4">
+        <a href="#" className="text-blue-600 flex items-center">
+          <span className="mr-1 bg-custom-dark-blue text-white rounded-full h-6 w-6 flex items-center justify-center">
+            ?
+          </span>
+          Help
+        </a>
+        <button className="bg-custom-dark-blue text-custom-yellow py-2 px-4 rounded-full">
+          Sign-In
+        </button>
+        <button className="border border-blue-600 text-blue-600 py-2 px-4 rounded-full">
+          Register
+        </button>
+        <div className="flex items-center space-x-1">
+          <img
+            src="https://flagcdn.com/gb.svg "
+            alt="Flag"
+            className="rounded-full h-6 w-6 object-cover"
+          />
+          <span className="text-blue-600">EN</span>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 
