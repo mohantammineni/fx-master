@@ -16,17 +16,17 @@ const BusinessPage = () => {
         </div>
 
         <div className="relative z-10 flex flex-col md:flex-row items-start justify-between h-full pt-4 md:pt-8">
-          <div className="max-w-lg md:max-w-none md:text-left md:w-1/2 font-openSans pl-10 pt-12">
-            <h1 className="text-4xl md:text-3xl font-bold tracking-wide text-custom-yellow">
+          <div className="max-w-lg md:max-w-none md:text-left md:w-1/2 font-openSans pl-10 pt-12 text-white">
+            <h1 className="text-4xl md:text-3xl font-bold tracking-wide">
               Your Partner in Global Business Transactions
             </h1>
-            <div className="border-b-4 border-yellow-400 w-24 mt-2"></div>
-            <p className="mt-4 text-lg md:text-lg font-bold text-custom-maiza">
+            <div className="border-b-4 border-white w-24 mt-2"></div>
+            <p className="mt-4 text-lg md:text-lg font-bold">
               Navigating the complexities of international business has never
-              been easier. At [Your Company Name], we offer a suite of services
-              designed to simplify cross-border payments, streamline payment
-              collections, and manage multi-currency accounts, all tailored to
-              meet the unique needs of business customers.
+              been easier. At FXMaster, we offer a suite of services designed to
+              simplify cross-border payments, streamline payment collections,
+              and manage multi-currency accounts, all tailored to meet the
+              unique needs of business customers.
             </p>
           </div>
 
@@ -51,9 +51,9 @@ const BusinessPage = () => {
               className="rounded-lg w-full h-40 object-cover mb-4"
             />
             <h3 className="text-lg font-bold font-openSans text-black mb-2">
-              Competitive Exchange Rates
+              Competitive Exchange Rates:
             </h3>
-            <p className="text-sm text-custom-slate font-bold">
+            <p className="text-sm text-black font-bold">
               Rates: Maximize your savings with the best exchange rates
               available.
             </p>
@@ -66,9 +66,9 @@ const BusinessPage = () => {
               className="rounded-lg w-full h-40 object-cover mb-4"
             />
             <h3 className="text-lg font-bold font-openSans text-black mb-2">
-              Transparent Fees
+              Transparent Fees:
             </h3>
-            <p className="text-sm text-custom-slate font-bold">
+            <p className="text-sm text-black font-bold">
               No hidden costs. Our pricing is straightforward, so you know
               exactly what you&apos;re paying.
             </p>
@@ -81,9 +81,9 @@ const BusinessPage = () => {
               className="rounded-lg w-full h-40 object-cover mb-4"
             />
             <h3 className="text-lg font-bold font-openSans text-black mb-2">
-              Fast and Secure Transactions
+              Fast and Secure Transactions:
             </h3>
-            <p className="text-sm text-custom-slate font-bold">
+            <p className="text-sm text-black font-bold">
               Enjoy quick, reliable, and secure transactions, protecting your
               funds and data.
             </p>
@@ -96,9 +96,9 @@ const BusinessPage = () => {
               className="rounded-lg w-full h-40 object-cover mb-4"
             />
             <h3 className="text-lg font-bold font-openSans text-black mb-2">
-              Global Reach
+              Global Reach:
             </h3>
-            <p className="text-sm text-custom-slate font-bold">
+            <p className="text-sm text-black font-bold">
               Conduct business seamlessly with partners, suppliers, and
               customers worldwide.
             </p>
@@ -151,15 +151,6 @@ const BusinessPage = () => {
                   </p>
                   <ul className="list-disc list-inside space-y-1 mt-5 ml-3">
                     <li>
-                      Multi-Currency Invoicing: Invoice clients in their
-                      preferred currency and receive payments in your desired
-                      currency.
-                    </li>
-                    <li>
-                      Automated Collections: Set up automated schedules to
-                      ensure timely payments.
-                    </li>
-                    <li>
                       Secure Payment Gateways: Facilitate seamless and secure
                       transactions with our reliable payment gateways.
                     </li>
@@ -205,12 +196,12 @@ const BusinessPage = () => {
       </section>
       <section className="px-12 py-6 mt-6">
         <div className="bg-custom-dark-blue text-white py-12 px-6 rounded-lg">
-          <h2 className="text-center text-3xl font-bold font-openSans text-custom-yellow mb-8">
+          <h2 className="text-center text-3xl font-bold font-openSans mb-8">
             Why Businesses Trust Us
           </h2>
           <div className="space-y-6">
             <div className="flex items-center">
-              <div className="bg-yellow-400 p-3 rounded-full">
+              <div className="bg-white p-3 rounded-full">
                 <svg
                   className="w-6 h-6 text-black"
                   fill="currentColor"
@@ -224,13 +215,13 @@ const BusinessPage = () => {
                   />
                 </svg>
               </div>
-              <span className="ml-4 text-lg font-bold font-openSans text-custom-maiza">
-                Scalability For Startups: Grow Seamlessly.
+              <span className="ml-4 text-lg font-bold font-openSans">
+                Scalability For All Business
               </span>
             </div>
             <hr className="border-t border-gray-300" />
             <div className="flex items-center">
-              <div className="bg-yellow-400 p-3 rounded-full">
+              <div className="bg-white p-3 rounded-full">
                 <svg
                   className="w-6 h-6 text-black"
                   fill="currentColor"
@@ -244,13 +235,13 @@ const BusinessPage = () => {
                   />
                 </svg>
               </div>
-              <span className="ml-4 text-lg font-bold font-openSans text-custom-maiza">
-                Robust Risk Management: Protect Against Fraud.
+              <span className="ml-4 text-lg font-bold font-openSans">
+                Robust Governance Transaction Monitoring
               </span>
             </div>
             <hr className="border-t border-gray-300" />
             <div className="flex items-center">
-              <div className="bg-yellow-400 p-3 rounded-full">
+              <div className="bg-white p-3 rounded-full">
                 <svg
                   className="w-6 h-6 text-black"
                   fill="currentColor"
@@ -264,8 +255,8 @@ const BusinessPage = () => {
                   />
                 </svg>
               </div>
-              <span className="ml-4 text-lg font-bold font-openSans text-custom-maiza">
-                Compliance Services: Navigate Regulations Easily.
+              <span className="ml-4 text-lg font-bold font-openSans text-white">
+                Compliance Services: Navigate Regulations Easily
               </span>
             </div>
           </div>
@@ -295,8 +286,7 @@ const BusinessPage = () => {
               <p className="text-base font-semibold font-openSans text-[#1152BE]">
                 Sign up for FX MASTER today and start saving on your
                 international money transfers. Experience the convenience,
-                speed, and transparency that millions of satisfied customers
-                enjoy.
+                speed, and transparency that our customers enjoy.
               </p>
             </div>
           </div>

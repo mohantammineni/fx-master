@@ -10,8 +10,8 @@ import {
 
 function FrontFooter() {
   return (
-    <footer className="pt-10">
-      <div className="px-16">
+    <footer className="pt-10 bg-custom-yellow">
+      <div className="px-12">
         <div className="container mx-auto flex flex-wrap justify-center items-start">
           {/* Left: Logo */}
           <div className="w-full md:w-1/4 mb-6 md:mb-0 flex justify-center items-center">

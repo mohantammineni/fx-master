@@ -1,5 +1,4 @@
 import React from 'react';
-import { FiCheck } from 'react-icons/fi';
 import CustomerStoriesComponent from '../components/homepage/CustomerStoriesComponent';
 
 const FintechPage = () => {
@@ -10,10 +9,7 @@ const FintechPage = () => {
           <h1 className="text-4xl md:text-4xl font-openSans leading-tight tracking-wide mt-4">
             <span className="font-bold text-custom-dark-blue">
               White label banking <br />
-              Solutions:
-            </span>{' '}
-            <span className="font-normal text-black">
-              When complicated becomes simple
+              Solutions: When complicated becomes simple
             </span>
           </h1>
           <p className="mt-6 text-lg md:text-lg text-black leading-relaxed">
@@ -50,42 +46,113 @@ const FintechPage = () => {
             White Label Solutions
           </h2>
           <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold w-2/3 text-left">
-                Time to launch
-              </span>
+            <div className="flex justify-between items-center font-semibold text-custom-yellow">
+              <span className=" w-2/3 text-left">Time to launch</span>
               <div className="flex items-center justify-start w-1/3">
-                <FiCheck className="text-yellow-400 w-5 h-5 mr-2" />
+                <div className="bg-yellow-400 p-1 rounded-md flex justify-center items-center mr-2">
+                  <svg
+                    className="w-4 h-4 text-blue-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
                 <span>1-2 months</span>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold w-2/3 text-left">Compliance</span>
+            <div className="flex justify-between items-center font-semibold text-custom-yellow">
+              <span className="w-2/3 text-left">Compliance</span>
               <div className="flex items-center justify-start w-1/3">
-                <FiCheck className="text-yellow-400 w-5 h-5 mr-2" />
+                <div className="bg-yellow-400 p-1 rounded-md flex justify-center items-center mr-2">
+                  <svg
+                    className="w-4 h-4 text-blue-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
                 <span>Provided</span>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold w-2/3 text-left">IT</span>
+            <div className="flex justify-between items-center font-semibold text-custom-yellow">
+              <span className="w-2/3 text-left">IT</span>
               <div className="flex items-center justify-start w-1/3">
-                <FiCheck className="text-yellow-400 w-5 h-5 mr-2" />
+                <div className="bg-yellow-400 p-1 rounded-md flex justify-center items-center mr-2">
+                  <svg
+                    className="w-4 h-4 text-blue-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
                 <span>Provided</span>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold w-2/3 text-left">License</span>
+            <div className="flex justify-between items-center font-semibold text-custom-yellow">
+              <span className="w-2/3 text-left">License</span>
               <div className="flex items-center justify-start w-1/3">
-                <FiCheck className="text-yellow-400 w-5 h-5 mr-2" />
+                <div className="bg-yellow-400 p-1 rounded-md flex justify-center items-center mr-2">
+                  <svg
+                    className="w-4 h-4 text-blue-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
                 <span>Provided</span>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold w-2/3 text-left">
-                Minimum team
-              </span>
+            <div className="flex justify-between items-center font-semibold text-custom-yellow">
+              <span className="w-2/3 text-left">Minimum team</span>
               <div className="flex items-center justify-start w-1/3">
-                <FiCheck className="text-yellow-400 w-5 h-5 mr-2" />
+                <div className="bg-yellow-400 p-1 rounded-md flex justify-center items-center mr-2">
+                  <svg
+                    className="w-4 h-4 text-blue-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
                 <span>1-2</span>
               </div>
             </div>
@@ -112,7 +179,7 @@ const FintechPage = () => {
               alt="Internet banking"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               Internet banking
             </p>
           </div>
@@ -123,7 +190,7 @@ const FintechPage = () => {
               alt="iOS and Android apps"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               iOS and Android apps
             </p>
           </div>
@@ -134,7 +201,7 @@ const FintechPage = () => {
               alt="Multi-currency accounts"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               Multi-currency accounts
             </p>
           </div>
@@ -145,7 +212,7 @@ const FintechPage = () => {
               alt="Dedicated IBANs"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               Dedicated IBANs
             </p>
           </div>
@@ -156,7 +223,9 @@ const FintechPage = () => {
               alt="SWIFT payments"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">SWIFT payments</p>
+            <p className="text-lg font-semibold font-openSanse">
+              SWIFT payments
+            </p>
           </div>
 
           <div>
@@ -165,7 +234,7 @@ const FintechPage = () => {
               alt="SEPA Instant payments"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               SEPA Instant payments
             </p>
           </div>
@@ -176,26 +245,26 @@ const FintechPage = () => {
               alt="APIs"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">APIs</p>
+            <p className="text-lg font-semibold font-openSanse">APIs</p>
           </div>
 
-          <div>
+          {/* <div>
             <img
               src="/fintech/strong-customer.png"
               alt="Strong customer"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               Strong customer authentication
             </p>
-          </div>
+          </div> */}
           <div>
             <img
               src="/fintech/kyb-onboarding.png"
               alt="KYC/KYB Onboarding"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               KYC/KYB onboarding
             </p>
           </div>
@@ -205,13 +274,13 @@ const FintechPage = () => {
               alt="Open Bank"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">Open banking</p>
+            <p className="text-lg font-semibold font-openSanse">Open banking</p>
           </div>
         </div>
       </section>
       <section className="px-12 py-6 mt-6">
         <h2 className="text-4xl font-openSans font-bold text-custom-dark-blue tracking-wide">
-          Benifits
+          Benefits
         </h2>
 
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center mt-10">
@@ -221,7 +290,7 @@ const FintechPage = () => {
               alt="AML and compliance coverage"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               AML and compliance coverage
             </p>
           </div>
@@ -232,7 +301,7 @@ const FintechPage = () => {
               alt="Full IT infrastructure"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
+            <p className="text-lg font-semibold font-openSanse">
               Full IT infrastructure
             </p>
           </div>
@@ -243,8 +312,8 @@ const FintechPage = () => {
               alt="Custamisable pricing"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
-              Custamisable pricing
+            <p className="text-lg font-semibold font-openSanse">
+              Custamisable pricing / Product features
             </p>
           </div>
 
@@ -254,8 +323,8 @@ const FintechPage = () => {
               alt="tailor made features on demand"
               className="mx-auto mb-4 w-20 h-20"
             />
-            <p className="text-lg font-medium font-openSanse">
-              tailor made features on demand
+            <p className="text-lg font-semibold font-openSanse">
+              Tailor made features on demand
             </p>
           </div>
         </div>
