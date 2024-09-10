@@ -6,22 +6,24 @@ import CustomerStoriesComponent from '../components/homepage/CustomerStoriesComp
 const BusinessPage = () => {
   return (
     <>
-      <section className="relative w-full min-h-full">
+      <section className="relative w-full min-h-screen">
         <div className="absolute inset-0 w-full h-full">
           <img
             src="/business/business-hero-bg.png"
             alt="Blue Background"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-fill"
+            style={{ objectPosition: 'top left' }}
           />
         </div>
 
         <div className="relative z-10 flex flex-col md:flex-row items-start justify-between h-full pt-4 md:pt-8">
-          <div className="max-w-lg md:max-w-none md:text-left md:w-1/2 font-openSans pl-10 pt-12 text-white">
+          {/* Text Container */}
+          <div className="max-w-lg md:max-w-none md:text-left md:w-1/2 font-openSans pl-6 pr-6 md:pl-10 md:pr-0 pt-12 text-white">
             <h1 className="text-4xl md:text-3xl font-bold tracking-wide">
               Your Partner in Global Business Transactions
             </h1>
             <div className="border-b-4 border-white w-24 mt-2"></div>
-            <p className="mt-4 text-lg md:text-lg font-bold">
+            <p className="mt-4 w-[72%] md:w-full text-sm md:text-lg font-bold">
               Navigating the complexities of international business has never
               been easier. At FXMaster, we offer a suite of services designed to
               simplify cross-border payments, streamline payment collections,
@@ -30,7 +32,8 @@ const BusinessPage = () => {
             </p>
           </div>
 
-          <div className="relative md:w-1/2 flex justify-center mt-4 md:mt-0">
+          {/* Image Container */}
+          <div className="relative md:w-1/2 flex justify-center mt-6 md:mt-0 px-6">
             <img
               src="/business/business-hero.png"
               alt="Woman with Flags"
@@ -39,6 +42,7 @@ const BusinessPage = () => {
           </div>
         </div>
       </section>
+
       <section className="px-12 py-6 mt-6">
         <h2 className="text-4xl font-openSans font-bold text-custom-dark-blue tracking-wide">
           Why Choose Fx Master ?
