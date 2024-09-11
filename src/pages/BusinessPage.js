@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ChooseUs from '../components/homepage/choose-us';
 import ContactInformation from '../components/homepage/ContactInformation';
 import CustomerStoriesComponent from '../components/homepage/CustomerStoriesComponent';
+import { useLocation } from 'react-router-dom';
 
 const BusinessPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#contact') {
+      const element = document.getElementById('contact');
+      if (element) {
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+
+        // Calculate the position of the contact section
+        const yOffset = -headerHeight; // Offset by the height of the fixed header
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+        // Scroll to the calculated position
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <section className="relative w-full min-h-screen">
@@ -45,7 +66,7 @@ const BusinessPage = () => {
 
       <section className="px-12 py-6 mt-6">
         <h2 className="text-4xl font-openSans font-bold text-custom-dark-blue tracking-wide">
-          Why Choose Fx Master ?
+          Why Choose FX Master ?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-5">
           <div className="bg-white rounded-2xl shadow-md p-4">
@@ -296,7 +317,10 @@ const BusinessPage = () => {
           </div>
         </div>
       </section>
-      <section className="container mx-auto rounded-2xl mt-12 mb-12 px-12">
+      <section
+        id="contact"
+        className="container mx-auto rounded-2xl mt-12 mb-12 px-12"
+      >
         <ContactInformation />
       </section>
     </>

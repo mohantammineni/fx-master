@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomerStoriesComponent from '../components/homepage/CustomerStoriesComponent';
+import { Link } from 'react-router-dom';
 
 const FintechPage = () => {
   return (
@@ -345,9 +346,11 @@ const FintechPage = () => {
             Interested to learn more about the <br /> white-label banking
             solution?
           </h2>
-          <button className="bg-yellow-400 text-custom-dark-blue font-semibold py-2 px-6 md:px-8 rounded-full hover:bg-yellow-300">
-            Contact Us
-          </button>
+          <Link to="/business#contact">
+            <button className="bg-yellow-400 text-custom-dark-blue font-semibold py-2 px-6 md:px-8 rounded-full hover:bg-yellow-300">
+              Contact Us
+            </button>
+          </Link>
         </div>
       </section>
     </>
