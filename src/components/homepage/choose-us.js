@@ -13,10 +13,10 @@ function ChooseUs({
     >
       <img src={image} alt="Exchange Rate Image" className="w-full h-auto" />
       <div className="p-4">
-        <h3 className="text-lg text-custom-yellow font-openSans font-bold">
-          {heading}:
+        <h3 className="text-lg text-white font-openSans font-bold">
+          {heading}
         </h3>
-        <p className="pt-2 text-sm font-medium leading-relaxed text-custom-maiza">
+        <p className="pt-2 text-sm font-medium leading-relaxed text-white">
           {content}
         </p>
       </div>

@@ -21,27 +21,27 @@ const Carousel = () => {
 
   const slides = [
     {
-      title: "Hi, I'm Rajesh",
-      subtitle: "I work as a director",
-      content: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+      title: "Hi, I’m Nevak",
+      subtitle: "",
+      content: "I’ve been using FX Master for several months now, and I must say it’s hands down the best international money transfer service I’ve encountered.",
       image: "/customers/customer-1.png"
     },
     {
       title: "Hi, I'm Rajesh",
-      subtitle: "I work as a director",
-      content: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+      subtitle: "",
+      content: "Competitive Exchange Rates: I appreciate the transparency when it comes to fees and exchange rates. The rates offered are consistently better than most banks and other transfer services.",
       image: "/customers/customer-2.png"
     },
     {
-      title: "Hi, I'm Rajesh",
-      subtitle: "I work as a director",
-      content: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+      title: "Hi, I’m Royee",
+      subtitle: "",
+      content: "I highly recommend FX Master to anyone needing a reliable, efficient, and secure way to send money internationally. It’s truly a game-changer!",
       image: "/customers/customer-3.png"
     },
     {
-      title: "Hi, I'm Rajesh",
-      subtitle: "I work as a director",
-      content: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+      title: "Hi, I’m Joyee",
+      subtitle: "",
+      content: "I've had a great experience using FX Master for sending money internationally. It's fast, easy to use, and offers excellent exchange rates with low fees. The app is secure, and my transfers have always been reliable. Highly recommend it for anyone looking for a smooth money transfer service",
       image: "/customers/customer-4.png"
     }
   ];
@@ -56,8 +56,14 @@ const Carousel = () => {
                 index === 1 ? 'focused' : 'blurred'
               }`}
             >
-              <div className="w-1/3 h-full">
-                <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
+              <div className="image-container w-1/3 h-full transition-transform duration-500 ease-in-out">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className={`w-full object-cover transition-all duration-500 ease-in-out ${
+                    index === 1 ? 'focused-image' : 'blurred-image'
+                  }`}
+                />
               </div>
               <div className="w-2/3 p-4 text-[#FFC92E]">
                 <h3 className="text-xl font-semibold mb-1">{slide.title}</h3>

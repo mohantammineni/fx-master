@@ -6,10 +6,10 @@ import { NavLink, useLocation } from 'react-router-dom';
 const FrontNavbar = () => {
   const location = useLocation();
   return (
-    <header className="sticky top-0 w-full flex flex-col md:flex-row items-center justify-between pl-12 pr-12 pt-2 pb-2 bg-white shadow-md z-50">
+    <header className="sticky top-0 w-full flex flex-col md:flex-row items-center justify-between md:pl-12 md:pr-12 pt-2 pb-2 bg-white shadow-md z-50">
       {/* Logo */}
       <div className="flex items-center md:mb-0">
-        <img src="/fx_logo.png" alt="FX Master Logo" className="h-10 mr-4" />
+        <img src="/fx_logo.png" alt="FX Master Logo" className="h-20 mr-4" />
       </div>
 
       {/* Navigation */}

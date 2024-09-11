@@ -24,6 +24,9 @@ module.exports = {
         'custom-dark-blue': '#0F51Bc',
         'custom-cobolt-blue': '#1052BC',
         'custom-maize-yellow': '#F4CE61',
+        'custom-richblack': '#011C2A',
+        'custom-lightgray': '#E0E0E0',
+        'custom-yellow': '#ffc92e',
       },
       textColor: {
         'custom-neutral-900': '#012646',
@@ -33,6 +36,7 @@ module.exports = {
         'custom-dark-blue': '#0F51BC',
         'custom-maiza': '#FFE77B',
         'custom-slate': '#425466',
+        'custom-richblack': '#011C2A',
       },
       borderColor: {
         'custom-sky-blue-500': '#40DEFF',

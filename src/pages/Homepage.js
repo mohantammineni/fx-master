@@ -546,8 +546,7 @@ function Homepage() {
               <p className="text-base font-semibold font-openSans text-[#1152BE]">
                 Sign up for FX MASTER today and start saving on your
                 international money transfers. Experience the convenience,
-                speed, and transparency that millions of satisfied customers
-                enjoy.
+                speed, and transparency that our customers enjoy.
               </p>
             </div>
           </div>
