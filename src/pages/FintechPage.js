@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomerStoriesComponent from '../components/homepage/CustomerStoriesComponent';
+import { Link } from 'react-router-dom';
 
 const FintechPage = () => {
   return (
@@ -19,9 +20,11 @@ const FintechPage = () => {
             banking solutions to help business owners save their time and
             resources and focus on development, sales, and speed to the market.
           </p>
-          <button className="mt-6 bg-custom-dark-blue text-white py-3 px-6 rounded-full text-lg font-inter font-normal">
-            Request Now
-          </button>
+          <Link to="/business#contact">
+            <button className="mt-6 bg-custom-dark-blue text-white py-3 px-6 rounded-full text-lg font-inter font-normal">
+              Request Now
+            </button>
+          </Link>
         </div>
 
         <div className="md:w-1/2 flex justify-end mt-8 md:mt-0">
@@ -345,9 +348,11 @@ const FintechPage = () => {
             Interested to learn more about the <br /> white-label banking
             solution?
           </h2>
-          <button className="bg-yellow-400 text-custom-dark-blue font-semibold py-2 px-6 md:px-8 rounded-full hover:bg-yellow-300">
-            Contact Us
-          </button>
+          <Link to="/business#contact">
+            <button className="bg-yellow-400 text-custom-dark-blue font-semibold py-2 px-6 md:px-8 rounded-full hover:bg-yellow-300">
+              Contact Us
+            </button>
+          </Link>
         </div>
       </section>
     </>
