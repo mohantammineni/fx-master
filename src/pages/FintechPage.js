@@ -20,9 +20,11 @@ const FintechPage = () => {
             banking solutions to help business owners save their time and
             resources and focus on development, sales, and speed to the market.
           </p>
-          <button className="mt-6 bg-custom-dark-blue text-white py-3 px-6 rounded-full text-lg font-inter font-normal">
-            Request Now
-          </button>
+          <Link to="/business#contact">
+            <button className="mt-6 bg-custom-dark-blue text-white py-3 px-6 rounded-full text-lg font-inter font-normal">
+              Request Now
+            </button>
+          </Link>
         </div>
 
         <div className="md:w-1/2 flex justify-end mt-8 md:mt-0">
