@@ -1,0 +1,2 @@
+to_amount,to_currency,reason,payment_unique_request_id,reference,delivery_date,payment_type,bank_account_holder_name,destination_country_code,beneficiary_type,beneficiary_company_name,beneficiary_last_name,beneficiary_first_name,beneficiary_address,beneficiary_city,beneficiary_state_or_province,beneficiary_postcode,beneficiary_country,bic_swift,account_number,iban,aba,bank_code,branch_code,sort_code,bank_name,bank_account_type
+10,GBP,family,1234,reference text,25-09-2024,regular / priority,Account Name,GB,individual / corporate,,,,,,,,,,,,,,,,,savings / current
