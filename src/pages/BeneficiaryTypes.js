@@ -41,7 +41,7 @@ function BeneficiaryTypes() {
                 <img src="/self-round.png" alt="self" className="w-10 h-10" />
                 <span className="text-base font-medium text-black">Self Transaction</span>
               </div>
-              <img src="/arrow-right.png" alt="arrow" className="w-6 h-6" />
+              <img src="/self-transaction.svg" alt="arrow" className="w-6 h-6" />
             </button>
       
             {/* Business / Welfare */}
@@ -60,7 +60,7 @@ function BeneficiaryTypes() {
               className="w-full flex items-center justify-between bg-white rounded-lg shadow-md px-4 py-3 hover:bg-gray-50"
             >
               <div className="flex items-center space-x-4">
-                <img src="/buss-round.png" alt="business" className="w-10 h-10" />
+                <img src="/welfare.svg" alt="business" className="w-10 h-10" />
                 <span className="text-base font-medium text-black">Business / Welfare</span>
               </div>
               <img src="/arrow-right.png" alt="arrow" className="w-6 h-6" />
@@ -85,7 +85,7 @@ function BeneficiaryTypes() {
                 <img src="/group-round.png" alt="group" className="w-10 h-10" />
                 <span className="text-base font-medium text-black">Another Person</span>
               </div>
-              <img src="/arrow-right.png" alt="arrow" className="w-6 h-6" />
+              <img src="/another-person.svg" alt="arrow" className="w-6 h-6" />
             </button>
           </div>
         </div>
