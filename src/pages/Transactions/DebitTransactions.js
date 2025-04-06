@@ -182,7 +182,7 @@ function DebitTransactions() {
   useEffect(() => {
     getData(currentPage);
     // getIpAddress();
-  }, []);
+  }, [searchText]);
 
   const handleSearch = () => {
     setCurrentPage(0);
@@ -863,6 +863,33 @@ function DebitTransactions() {
                       })}
                     </table>
                   </>)}
+
+                <div style={{ textAlign: 'center' }}>
+                  {!loading &&
+                    (!edit ?
+                      <button onClick={() => setEdit(true)}
+                        className="bg-[#205FFF] text-white px-4 py-2 mt-4 rounded-xl text-sm">
+                        Edit
+                      </button>
+                      :
+                      <>
+                        <button onClick={() => {
+                          setEdit(false);
+                          handleClose();
+                          setSave(false);
+                        }}
+                          className="border-2 border-[#205FFF] text-[#205FFF] mr-4 px-4 mt-4 py-2 rounded-xl text-sm">
+                          Cancel
+                        </button>
+                        <button onClick={() => saveData()}
+                          className="bg-[#205FFF] text-white px-4 mt-4 py-2 rounded-xl text-sm">
+                          Save
+                        </button>
+                      </>
+                    )
+                  }
+
+                </div>
               </>
             </div>
           </div>

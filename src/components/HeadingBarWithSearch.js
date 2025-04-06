@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const HeadingBarWithSearch = ({ fullName, isSidebarOpen, setSidebarOpen }) => {
   return (
-    <div className="flex flex-wrap items-center justify-between py-2 px-4 md:px-8 shadow-xl border-b bg-white w-full">
+    <div className="flex flex-wrap items-center justify-between py-2 px-4 md:px-8 shadow-lg border-b bg-white w-full">
       {/* Logo */}
       <div className="flex items-center space-x-4">
         <Link to="/">
           <img
             src="/fx_logo.png"
             alt="Logo"
-            className="w-[80px] h-auto"
+            className="w-[140px] h-auto"
           />
         </Link>
       </div>

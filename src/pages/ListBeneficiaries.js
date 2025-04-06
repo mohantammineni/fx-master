@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Constants } from '../lib/const/constants';
-import { PrimaryButton } from '../components/button';
 import Beneficiary from './Beneficiaries/Beneficiary';
-import { FaPlusCircle } from 'react-icons/fa';
+
 
 function ListBeneficiaries() {
   const navigate = useNavigate();
@@ -51,46 +50,51 @@ function ListBeneficiaries() {
       }
     }).then(resp => {
       var beneData = resp.data.data;
-
       beneData.forEach(element => {
-        if (element.provider == 'clear_bank') {
+        if (element.provider === 'clear_bank') {
           beneficiaryLists.push({
-            "id": element.id, "display_name": element.beneficiaryName, "bank_account_number": element.banks[0].accountNumber, "country_flag": Constants.FXMASTER_BASE_URL + "flags/UK.png", "avatar": "",
-            "code": element.banks[0].sortCode, "bank_code_type": "sort_code", "type": "Sort Code", "country": element.country, "bank_account_name": "", "bank_account_id": element.banks[0].id, "currency": "GBP", "country_id": 231
-          })
-        }
-        else {
-          // const countryCodeMapping = {
-          //   105: 'ifsc_code',
-          //   234: 'aba_number',
-          //   231: 'sort_code',
-          //   38: 'branch_code',
-          //   13: 'bsb_number',
-          //   2: 'iban_number',
-          //   1: 'iban_number',
-          //   55: 'iban_number'
-          // };
-
+            id: element.id,
+            display_name: element.beneficiaryName,
+            bank_account_number: element.banks[0].accountNumber,
+            country_flag: Constants.FXMASTER_BASE_URL + "flags/UK.png",
+            avatar: "",
+            code: element.banks[0].sortCode,
+            bank_code_type: "sort_code",
+            type: "Sort Code",
+            country: element.country,
+            bank_account_name: "",
+            bank_account_id: element.banks[0].id,
+            currency: "GBP",
+            country_id: 231
+          });
+        } else {
           beneficiaryLists.push({
-            "id": element.id, "display_name": element.display_name, "bank_account_number": element.meta.bank_account_number != null && element.meta.bank_account_number != '' ? element.meta.bank_account_number : element.meta.iban, "country_flag": "", "avatar": "",
-            "code": element.meta.bic_number ?? element.meta.aba_number ?? element.meta.ifsc_code ?? element.meta.aba_number ?? element.meta.sort_code ?? element.meta.branch_code ?? element.meta.bsb_number ?? element.meta.routing_code_value_1, "bank_code_type": element.meta.bank_code_type, "type": element.type, "country": element.meta.beneficiary_address, "bank_account_name": element.meta.bank_account_name, "bank_account_id": "", "currency": "", "country_id": element.meta.bank_country
-          })
+            id: element.id,
+            display_name: element.display_name,
+            bank_account_number: element.meta.bank_account_number || element.meta.iban,
+            country_flag: "",
+            avatar: "",
+            code: element.meta.bic_number ?? element.meta.aba_number ?? element.meta.ifsc_code ?? element.meta.sort_code ?? element.meta.branch_code ?? element.meta.bsb_number ?? element.meta.routing_code_value_1,
+            bank_code_type: element.meta.bank_code_type,
+            type: element.type,
+            country: element.meta.beneficiary_address,
+            bank_account_name: element.meta.bank_account_name,
+            bank_account_id: "",
+            currency: "",
+            country_id: element.meta.bank_country
+          });
         }
-      })
-      setBeneficiaries(beneficiaryLists)
+      });
+      setBeneficiaries(beneficiaryLists);
       setLoading(false);
-
     }).catch(err => {
       console.log(err.response);
-      setLoading(false)
-    })
-  }
+      setLoading(false);
+    });
+  };
 
-  const selectedBeneficiary = async (display_name, code, bank_account_number, type, beneficiaryid, country, bank_account_id, country_id) => {
-    console.log(display_name, code, bank_account_number, type, beneficiaryid, country, bank_account_id, country_id);
-    if (country_id != '' && country_id != null) {
-      console.log(display_name, code, bank_account_number, type, beneficiaryid, country, bank_account_id, country_id);
-      
+  const selectedBeneficiary = (display_name, code, bank_account_number, type, beneficiaryid, country, bank_account_id, country_id) => {
+    if (country_id) {
       navigate('/SendMoneyByBeneficiary', {
         state: {
           currencyid: country_id,
@@ -102,39 +106,52 @@ function ListBeneficiaries() {
           selectedbeneficiaryCountry: country,
           selectedbeneficiaryBankAccountId: bank_account_id
         },
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="my-2">
-      <div className="bg-white rounded-2xl my-4 justify-between shadow-lg items-center">
-        <div className="items-center justify-between px-8 pt-6 pb-4 text-black">
-          <p className="font-normal text-lg pb-2">Beneficiaries</p>
-          {loading}
-        </div>
-        <div className="flex items-center justify-between px-8 pt-6 pb-4 text-black">
-          <input type="text" pattern=".{3,}" value={searchName} title="3 characters minimum" className="w-full rounded-2xl p-2 bg-[#E0E4EB] mx-1" placeholder="Search Beneficiaries" onChange={(e) => { setsearchName(e.target.value); }}></input>
-          {/* <PrimaryButton label={'Search'} style={{ width: 100 }} onClick={() => beneficiaryList()} /> */}
-          <PrimaryButton label={'Clear'} style={{ width: 100 }} onClick={() => { setsearchName(''); beneficiaryList() }} />
-        </div>
-      </div>
+     
+      <div className="flex items-center justify-between py-4 px-8">
+  {/* Heading */}
+  <h2 className="text-xl font-bold text-black flex-shrink-0">Beneficiaries</h2>
 
-      <div className="flex items-center justify-between py-4 mb-4">
-        <div className="flex items-center m-5">
-          <p className="font-bold text-lg pb-2">Select Beneficiary</p>
-        </div>
-        <div className="flex space-x-4">
-          <button onClick={() => navigate("/SelectCurrencyForBeneficiary")}
-            className="bg-[#1152BE] border border-[#1152BE] text-white px-6 py-2 rounded-lg flex items-center text-base">
-            <FaPlusCircle className="font-light m-1" /> Add Beneficiary
-          </button>
-        </div>
-      </div>
+  {/* Search & Add Beneficiary in the Same Row */}
+  <div className="flex items-center space-x-4 w-full justify-end">
+    {/* Search Bar with Icon */}
+    <div className="relative w-64"> {/* Reduced width from max-w-sm to w-64 */}
+      <input
+        type="text"
+        pattern=".{3,}"
+        value={searchName}
+        title="3 characters minimum"
+        className="w-full rounded-md p-2 pr-10 border border-[#454951] text-black placeholder-[#303644] focus:outline-none"
+        placeholder="Search beneficiaries"
+        onChange={(e) => setsearchName(e.target.value)}
+      />
+      <img
+        src="/search-benificiary.png"
+        alt="Search Icon"
+        className="absolute right-3 top-2.5 w-5 h-5"
+      />
+    </div>
 
-      <div className="bg-white rounded-3xl">
+    {/* Add Beneficiary Button */}
+    <button
+      onClick={() => navigate("/SelectCurrencyForBeneficiary")}
+      className="border border-[#205FFF] font-bold text-[#205FFF] px-6 py-2 rounded-lg text-base whitespace-nowrap"
+    >
+      + Add Beneficiary
+    </button>
+  </div>
+</div>
+
+
+     
+      <div className="bg-white rounded-3xl mt-4">
         {loading ? (
-          <div className="text-center">Loading beneficiaries...</div>
+          <div className="text-center py-6">Loading beneficiaries...</div>
         ) : (
           <Beneficiary
             beneficiaryList={beneficiaries}

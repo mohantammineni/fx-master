@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React,  {useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Constants } from '../../lib/const/constants';
@@ -172,14 +172,14 @@ function DebitTransactions() {
   useEffect(() => {
     getData(currentPage);
     // getIpAddress();
-  }, []);
+  }, [searchText]);
 
   const handleSearch = () => {
     setCurrentPage(0);
     setTransactions([]);
-    getData(1)
+    getData(0)
   };
-  const reset = () => {
+  const reset =() =>{
     setSearchText({
       transactionId: '',
       date: '',
@@ -244,7 +244,6 @@ function DebitTransactions() {
   const handleUserFileChange = async (event) => {
     const files = event.target.files;
     const updatedFiles = []; // Temporary structure to update the UI immediately
-
     // Loop through files to prepare initial data
     for (let i = 0; i < files.length; i++) {
       updatedFiles.push({
@@ -259,7 +258,6 @@ function DebitTransactions() {
     for (let i = 0; i < files.length; i++) {
       filePromises.push(convertFileToBase64(files[i]));
     }
-
     // Convert files to Base64 and update the state
     try {
       const base64Files = await Promise.all(filePromises);
@@ -268,7 +266,7 @@ function DebitTransactions() {
         name: updatedFiles[index].name, // Original file name
         preview: URL.createObjectURL(files[index]), // Preview URL for immediate display
       }));
-      setedituserAttachment(completedFiles);
+      setedituserAttachment(completedFiles); 
     } catch (error) {
       console.error('Error converting files to Base64:', error);
     }
@@ -297,10 +295,6 @@ function DebitTransactions() {
       });
   };
 
-
-
-
-
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -314,7 +308,6 @@ function DebitTransactions() {
   const saveData = async () => {
     setSave(true);
     const login_token = sessionStorage.getItem('staff_login_token');
-
     try {
       const response = await axios.post(
         `${Constants.BASE_URL}API-FX-201-STORE-COMPLIANCE-TRANSACTION-DETAILS/${refId}`,
@@ -386,468 +379,441 @@ function DebitTransactions() {
     <div className="my-2">
       <ToastContainer />
       <div
-        className={`fixed top-0 right-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 overflow-y-auto ${show ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        style={{
-          width: '90%',
+  className={`fixed top-0 right-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 overflow-y-auto ${
+    show ? 'translate-x-0' : 'translate-x-full'
+  }`}
+  style={{
+    width: '90%',
+    
+  }}
+>
+  
 
-        }}
-      >
+        <ChangeStatusDialog
+          isOpen={openStatusDialog}
+          onClose={() => setOpenStatusDialog(false)}
+          transactionId={changeStatusTransactionId}
+          workspaceId={changeStatusWorkspaceId}
+        />
 
         <>
-          <div className="flex justify-between px-4 pt-6">
-            <div className="text-left font-bold text-lg">Transaction Details</div>
-            <div className="text-right font-bold space-x-8 text-lg">
-              <span>
+            <div className="flex justify-between px-4 pt-6">
+              <div className="text-left font-bold text-lg">Transaction Details</div>
+              <div className="text-right font-bold space-x-8 text-lg">
+                <span>
+                  <button
+                    className="text-blue-600"
+                    onClick={() => setOpenStatusDialog(true)}
+                  >Change Status</button>
+                </span>
+                {!loading && (
+                <span>
+                    Beneficiary Name:
+                    <button
+                      className="font-bold text-[#205FFF] ml-2"
+                      onClick={() => openBene(beneId)}>{beneName}
+                    </button>
+                </span>) }
+                <span>
                 <button
-                  className="text-blue-600"
-                  style={{display:'none'}}
-                  onClick={() => setOpenStatusDialog(true)}
-                >Change Status</button>
-              </span>
-              <form id="changeStatus">
-                <div className="mt-4">
-                  <div className='flex'>
-                    {/* <label className="block text-sm font-medium text-gray-700">Payment Status</label> */}
-                    <select
-                      value={transactionStatus}
-                      onChange={(e) => setTransactionStatus(e.target.value)}
-                      className="w-full p-2 border rounded-lg mt-2"
-                    >
-                      <option value="">Change Payment Status</option>
-                      <option value="Completed">Completed</option>
-                      <option value="failed">Failed</option>
-                    </select>
-                  </div>
-                </div>
-              </form>
-              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+    onClick={handleClose}
+    className="text-2xl text-gray-600"
+  >
+    <MdClose />
+  </button>
+                </span>
+              </div>
+            </div>
+            <div style={{ paddingLeft: 15, paddingRight: 15, paddingBottom: 15, paddingTop: 15 }}>
+              <div style={{
+                borderRadius: 10,
+                padding: 5,
+                background: '#ffffff',
+                height: 700,
+                overflow: 'scroll',
+              }}>
+                <>
+                  {loading && (<div className="mx-5">loading...</div>)}
+
+                  {!loading &&
+                    <>
+                     <Table className="w-full text-sm text-left border border-gray-200 border-collapse shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+  <Tbody>
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+        Reference Id
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+        {refId}
+      </Td>
+    </Tr>
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+        Sent Amount
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+        {amount}
+      </Td>
+    </Tr>
+    {cardFees != '' && cardFees != null && (
+      <Tr className="border-b border-[#B7B7B7]">
+        <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+          Fees
+        </Td>
+        <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+          GBP {cardFees}
+        </Td>
+      </Tr>
+    )}
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+        Date
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+        {date}
+      </Td>
+    </Tr>
+    {beneBankNumber != '' && beneBankNumber != null && (
+      <Tr className="border-b border-[#B7B7B7]">
+        <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+          Account Number
+        </Td>
+        <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+          {beneBankNumber}
+        </Td>
+      </Tr>
+    )}
+    {beneBankCodeValue != '' && beneBankCodeValue != null && (
+      <Tr className="border-b border-[#B7B7B7]">
+        <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+          Code
+        </Td>
+        <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+          {beneBankCodeValue}
+        </Td>
+      </Tr>
+    )}
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+        Transfer Type
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
+        {paymentMethod}
+      </Td>
+    </Tr>
+  </Tbody>
+</Table>
+
+                    
+                      <br />
+                      <Table className="w-full text-sm text-left py-4">
+                        <Thead className="=">
+                          <Tr>
+                            <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Field
+                              Name</Th>
+                            <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Field
+                              Value</Th>
+                            <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Flag</Th>
+                            <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Requested
+                              Documents</Th>
+                          </Tr>
+
+                        </Thead>
+                        <Tbody>
+                          {save &&
+                            (<Tr>
+                              <Th scope="col" className="px-2 py-2"></Th>
+                              <Th scope="col" className="px-2 py-2">Saving...</Th>
+                              <Th scope="col" className="px-2 py-2"></Th>
+                              <Th scope="col" className="px-2 py-2"></Th>
+                            </Tr>)}
+                            <Tr>
+  <Td scope="col" className="px-2 py-2 font-normal">
+    <select
+      className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
+      disabled={!edit}
+      value={editfieldSelectedName}
+      onChange={(e) => seteditFieldSelectedName(e.target.value)}
+    >
+      <option>-Name-</option>
+      {editfieldName.map((resp) => (
+        <option key={resp.id} value={resp.value}>
+          {resp.value}
+        </option>
+      ))}
+    </select>
+  </Td>
+  <Td scope="col" className="px-2 py-2 font-normal">
+    <select
+      className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
+      disabled={!edit}
+      value={editfieldSelectedValue}
+      onChange={(e) => seteditFieldSelectedValue(e.target.value)}
+    >
+      <option>-Value-</option>
+      {editfieldValue.map((resp) => (
+        <option key={resp.id} value={resp.value}>
+          {resp.value}
+        </option>
+      ))}
+    </select>
+  </Td>
+  <Td scope="col" className="px-2 py-2 font-normal">
+    <select
+      className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
+      disabled={!edit}
+      value={editSelectedflag}
+      onChange={(e) => seteditSelectedFlag(e.target.value)}
+    >
+      <option>-Flag-</option>
+      {editflag?.map((resp) => (
+        <option key={resp}>{resp}</option>
+      ))}
+    </select>
+  </Td>
+  <Td scope="col" className="px-2 py-2 font-normal">
+  <div className="relative">
+  <select
+    className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
+    disabled={!edit}
+    multiple
+    size={edit ? 4 : 1} // Expand when in edit mode
+    onFocus={(e) => {
+      if (edit) {
+        e.target.size =
+          transactionUserType === 'individual'
+            ? Math.min(4, individual.length)
+            : Math.min(4, business.length); // Limit to a max size of 4 visible options
+      }
+    }}
+    onBlur={(e) => {
+      e.target.size = 1; // Collapse on blur
+    }}
+    onChange={(e) => {
+      const values = [...e.target.selectedOptions].map((opt) => opt.value);
+      setedittypeOfDocuments(values);
+    }}
+  >
+    {transactionUserType === 'individual'
+      ? individual.map((resp, index) => (
+          <option key={index} value={resp.id}>
+            {resp.document}
+          </option>
+        ))
+      : business.map((resp, index) => (
+          <option key={index} value={resp.id}>
+            {resp.document}
+          </option>
+        ))}
+  </select>
+  <div className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="w-4 h-4 text-gray-500"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </div>
+</div>
+
+  </Td>
+</Tr>
+
+                        </Tbody>
+                      </Table>
+
+                      <Table className="w-full text-sm text-left">
+  <Tbody>
+    {/* User Notes & Attachment Section */}
+    <Tr>
+      <Th scope="col" className="px-2 py-2 font-bold text-base">
+        User (Notes & Attachment)
+        <div className="my-4 flex items-start">
+          {/* Textarea for Notes */}
+          <textarea
+            value={!edit ? userNotes : edituserNotes}
+            disabled={!edit}
+            onChange={(e) => edit && seteditUserNotes(e.target.value)}
+            className={`p-2 rounded-lg outline-none mr-4 text-sm placeholder:text-[#707070] placeholder:font-normal resize-none w-3/4 ${
+              edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'
+            }`}
+            placeholder="Add notes..."
+            rows={4}
+          />
+
+          {/* Attachment Section */}
+          <div
+  className="w-1/4 flex flex-col justify-center items-center py-4 pl-2 border-dotted border-4 border-blue-500 rounded-lg text-center"
+  style={{ height: '100%' }}
+>
+  {userAttachment.length > 0 ? (
+    <div className="flex flex-col items-center">
+      <img className="w-10" src="./file-icon.jpeg" alt="File Icon" />
+      <p className="text-sm text-blue-500 font-medium mb-2">
+        { 'Document Attached'}
+      </p>
+      <button
+        className={`px-8 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600 ${
+          userAttachment[0] ? 'cursor-pointer' : 'cursor-not-allowed'
+        }`}
+        onClick={() => {
+          if (userAttachment[0]) {
+            window.open(Constants.FILE_PATH_BASE_URL+userAttachment[0], '_blank');
+          }
+        }}
+        disabled={!userAttachment[0]}
+      >
+        View Document
+      </button>
+    </div>
+  ) : (
+    <div>
+      <input
+        type="file"
+        ref={userFileInputRef}
+        onChange={handleUserFileChange}
+        className="hidden"
+      />
+      <button
+        className={`px-8 py-1 rounded-xl ${
+          edit ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+        }`}
+        disabled={!edit}
+        onClick={() => {
+          if (edit && userFileInputRef.current) {
+            userFileInputRef.current.click();
+          }
+        }}
+      >
+        Upload Document
+      </button>
+    </div>
+  )}
+</div>
+
+        </div>
+      </Th>
+    </Tr>
+
+    {/* Compliance Notes & Attachment Section */}
+    <Tr>
+      <Th scope="col" className="px-2 py-2 font-bold text-base">
+        Compliance (Notes & Attachment)
+        <div className="my-4 flex items-start">
+          {/* Textarea for Compliance Notes */}
+          <textarea
+            value={!edit ? complianceNotes : editcomplianceNotes}
+            disabled={!edit}
+            onChange={(e) => edit && seteditComplianceNotes(e.target.value)}
+            className={`p-2 rounded-lg outline-none mr-4 text-sm placeholder:text-[#707070] placeholder:font-normal resize-none w-3/4 ${
+              edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'
+            }`}
+            placeholder="Add Notes..."
+            rows={4}
+          />
+
+          {/* Attachment Section */}
+          <div
+            className="w-1/4 flex flex-col justify-center items-center py-4 pl-2 border-dotted border-4 border-blue-500 rounded-lg text-center"
+            style={{ height: '100%' }}
+          >
+            {complianceAttachment.length > 0 ? (
+              <div className="flex flex-col items-center">
+                <img className="w-10" src="./file-icon.jpeg" alt="File Icon" />
+                <p className="text-sm text-blue-500 font-medium mb-2">
+                  { 'Document Attached'}
+                </p>
                 <button
-                  type="button"
-                  onClick={handleChangeStatus}
-                  disabled={isProcessing}
-                  className={`inline-flex w-full justify-center rounded-md border border-transparent ${isProcessing ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'
-                    } px-4 py-2 text-white shadow-sm sm:ml-3 sm:w-auto sm:text-sm`}
+                  className="px-8 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
+                  onClick={() => {
+                    if (complianceAttachment[0]) {
+                      window.open(Constants.FILE_PATH_BASE_URL+complianceAttachment[0], '_blank');
+                    }
+                  }}
                 >
-                  Change Status
-                </button>
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-100 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Cancel
+                  View Document
                 </button>
               </div>
-              <ChangeStatusDialog
-                isOpen={openStatusDialog}
-                onClose={() => setOpenStatusDialog(false)}
-                transactionId={changeStatusTransactionId}
-                workspaceId={changeStatusWorkspaceId}
-              />
-              {!loading && (
-                <span>
-                  Beneficiary Name:
-                  <button
-                    className="font-bold text-[#205FFF] ml-2"
-                    onClick={() => openBene(beneId)}>{beneName}
-                  </button>
-                </span>)}
-              <span>
+            ) : (
+              <div>
+                <input
+                  type="file"
+                  ref={complianceFileInputRef}
+                  onChange={handleComplianceFileChange}
+                  className="hidden"
+                />
                 <button
-                  onClick={handleClose}
-                  className="text-2xl text-gray-600"
+                  className={`px-8 py-1 rounded-xl ${
+                    edit ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                  disabled={!edit}
+                  onClick={() => {
+                    if (edit && complianceFileInputRef.current) {
+                      complianceFileInputRef.current.click();
+                    }
+                  }}
                 >
-                  <MdClose />
+                  Upload Document
                 </button>
-              </span>
-            </div>
+              </div>
+            )}
           </div>
-          <div style={{ paddingLeft: 15, paddingRight: 15, paddingBottom: 15, paddingTop: 15 }}>
-            <div style={{
-              borderRadius: 10,
-              padding: 5,
-              background: '#ffffff',
-              height: 700,
-              overflow: 'scroll',
-            }}>
-              <>
-                {loading && (<div className="mx-5">loading...</div>)}
-
-                {!loading &&
-                  <>
-                    <Table className="w-full text-sm text-left border border-gray-200 border-collapse shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                      <Tbody>
-                        <Tr className="border-b border-[#B7B7B7]">
-                          <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                            Reference Id
-                          </Td>
-                          <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                            {refId}
-                          </Td>
-                        </Tr>
-                        <Tr className="border-b border-[#B7B7B7]">
-                          <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                            Sent Amount
-                          </Td>
-                          <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                            {amount}
-                          </Td>
-                        </Tr>
-                        {cardFees != '' && cardFees != null && (
-                          <Tr className="border-b border-[#B7B7B7]">
-                            <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                              Fees
-                            </Td>
-                            <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                              GBP {cardFees}
-                            </Td>
-                          </Tr>
-                        )}
-                        <Tr className="border-b border-[#B7B7B7]">
-                          <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                            Date
-                          </Td>
-                          <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                            {date}
-                          </Td>
-                        </Tr>
-                        {beneBankNumber != '' && beneBankNumber != null && (
-                          <Tr className="border-b border-[#B7B7B7]">
-                            <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                              Account Number
-                            </Td>
-                            <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                              {beneBankNumber}
-                            </Td>
-                          </Tr>
-                        )}
-                        {beneBankCodeValue != '' && beneBankCodeValue != null && (
-                          <Tr className="border-b border-[#B7B7B7]">
-                            <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                              Code
-                            </Td>
-                            <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                              {beneBankCodeValue}
-                            </Td>
-                          </Tr>
-                        )}
-                        <Tr className="border-b border-[#B7B7B7]">
-                          <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
-                            Transfer Type
-                          </Td>
-                          <Td className="w-[70%] px-4 py-2 font-bold text-base text-gray-900">
-                            {paymentMethod}
-                          </Td>
-                        </Tr>
-                      </Tbody>
-                    </Table>
-
-
-                    <br />
-                    <Table className="w-full text-sm text-left py-4">
-                      <Thead className="=">
-                        <Tr>
-                          <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Field
-                            Name</Th>
-                          <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Field
-                            Value</Th>
-                          <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Flag</Th>
-                          <Th scope="col" className="w-1/4 px-2 py-2 font-normal text-base">Requested
-                            Documents</Th>
-                        </Tr>
-
-                      </Thead>
-                      <Tbody>
-                        {save &&
-                          (<Tr>
-                            <Th scope="col" className="px-2 py-2"></Th>
-                            <Th scope="col" className="px-2 py-2">Saving...</Th>
-                            <Th scope="col" className="px-2 py-2"></Th>
-                            <Th scope="col" className="px-2 py-2"></Th>
-                          </Tr>)}
-                        <Tr>
-                          <Td scope="col" className="px-2 py-2 font-normal">
-                            <select
-                              className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
-                              disabled={!edit}
-                              value={editfieldSelectedName}
-                              onChange={(e) => seteditFieldSelectedName(e.target.value)}
-                            >
-                              <option>-Name-</option>
-                              {editfieldName.map((resp) => (
-                                <option key={resp.id} value={resp.value}>
-                                  {resp.value}
-                                </option>
-                              ))}
-                            </select>
-                          </Td>
-                          <Td scope="col" className="px-2 py-2 font-normal">
-                            <select
-                              className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
-                              disabled={!edit}
-                              value={editfieldSelectedValue}
-                              onChange={(e) => seteditFieldSelectedValue(e.target.value)}
-                            >
-                              <option>-Value-</option>
-                              {editfieldValue.map((resp) => (
-                                <option key={resp.id} value={resp.value}>
-                                  {resp.value}
-                                </option>
-                              ))}
-                            </select>
-                          </Td>
-                          <Td scope="col" className="px-2 py-2 font-normal">
-                            <select
-                              className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
-                              disabled={!edit}
-                              value={editSelectedflag}
-                              onChange={(e) => seteditSelectedFlag(e.target.value)}
-                            >
-                              <option>-Flag-</option>
-                              {editflag?.map((resp) => (
-                                <option key={resp}>{resp}</option>
-                              ))}
-                            </select>
-                          </Td>
-                          <Td scope="col" className="px-2 py-2 font-normal">
-                            <div className="relative">
-                              <select
-                                className={`w-3/4 px-2 py-1 rounded text-gray-700 border border-gray-300 focus:ring focus:ring-blue-500 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'}`}
-                                disabled={!edit}
-                                multiple
-                                size={edit ? 4 : 1} // Expand when in edit mode
-                                onFocus={(e) => {
-                                  if (edit) {
-                                    e.target.size =
-                                      transactionUserType === 'individual'
-                                        ? Math.min(4, individual.length)
-                                        : Math.min(4, business.length); // Limit to a max size of 4 visible options
-                                  }
-                                }}
-                                onBlur={(e) => {
-                                  e.target.size = 1; // Collapse on blur
-                                }}
-                                onChange={(e) => {
-                                  const values = [...e.target.selectedOptions].map((opt) => opt.value);
-                                  setedittypeOfDocuments(values);
-                                }}
-                              >
-                                {transactionUserType === 'individual'
-                                  ? individual.map((resp, index) => (
-                                    <option key={index} value={resp.id}>
-                                      {resp.document}
-                                    </option>
-                                  ))
-                                  : business.map((resp, index) => (
-                                    <option key={index} value={resp.id}>
-                                      {resp.document}
-                                    </option>
-                                  ))}
-                              </select>
-                              <div className="absolute top-1/2 right-3 transform -translate-y-1/2 pointer-events-none">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="2"
-                                  stroke="currentColor"
-                                  className="w-4 h-4 text-gray-500"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M19 9l-7 7-7-7"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-
-                          </Td>
-                        </Tr>
-
-                      </Tbody>
-                    </Table>
-
-                    <Table className="w-full text-sm text-left">
-                      <Tbody>
-                        {/* User Notes & Attachment Section */}
-                        <Tr>
-                          <Th scope="col" className="px-2 py-2 font-bold text-base">
-                            User (Notes & Attachment)
-                            <div className="my-4 flex items-start">
-                              {/* Textarea for Notes */}
-                              <textarea
-                                value={!edit ? userNotes : edituserNotes}
-                                disabled={!edit}
-                                onChange={(e) => edit && seteditUserNotes(e.target.value)}
-                                className={`p-2 rounded-lg outline-none mr-4 text-sm placeholder:text-[#707070] placeholder:font-normal resize-none w-3/4 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'
-                                  }`}
-                                placeholder="Add notes..."
-                                rows={4}
-                              />
-
-                              {/* Attachment Section */}
-                              <div
-                                className="w-1/4 flex flex-col justify-center items-center py-4 pl-2 border-dotted border-4 border-blue-500 rounded-lg text-center"
-                                style={{ height: '100%' }}
-                              >
-                                {userAttachment.length > 0 ? (
-                                  <div className="flex flex-col items-center">
-                                    <img className="w-10" src="./file-icon.jpeg" alt="File Icon" />
-                                    <p className="text-sm text-blue-500 font-medium mb-2">
-                                      {'Document Attached'}
-                                    </p>
-                                    <button
-                                      className={`px-8 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600 ${userAttachment[0] ? 'cursor-pointer' : 'cursor-not-allowed'
-                                        }`}
-                                      onClick={() => {
-                                        if (userAttachment[0]) {
-                                          window.open(Constants.FILE_PATH_BASE_URL + userAttachment[0], '_blank');
-                                        }
-                                      }}
-                                      disabled={!userAttachment[0]}
-                                    >
-                                      View Document
-                                    </button>
-                                  </div>
-                                ) : (
-                                  <div>
-                                    <input
-                                      type="file"
-                                      ref={userFileInputRef}
-                                      onChange={handleUserFileChange}
-                                      className="hidden"
-                                    />
-                                    <button
-                                      className={`px-8 py-1 rounded-xl ${edit ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                        }`}
-                                      disabled={!edit}
-                                      onClick={() => {
-                                        if (edit && userFileInputRef.current) {
-                                          userFileInputRef.current.click();
-                                        }
-                                      }}
-                                    >
-                                      Upload Document
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-
-                            </div>
-                          </Th>
-                        </Tr>
-
-                        {/* Compliance Notes & Attachment Section */}
-                        <Tr>
-                          <Th scope="col" className="px-2 py-2 font-bold text-base">
-                            Compliance (Notes & Attachment)
-                            <div className="my-4 flex items-start">
-                              {/* Textarea for Compliance Notes */}
-                              <textarea
-                                value={!edit ? complianceNotes : editcomplianceNotes}
-                                disabled={!edit}
-                                onChange={(e) => edit && seteditComplianceNotes(e.target.value)}
-                                className={`p-2 rounded-lg outline-none mr-4 text-sm placeholder:text-[#707070] placeholder:font-normal resize-none w-3/4 ${edit ? 'bg-[#d9d9d9]' : 'bg-gray-100 shadow-[0_4px_4px_rgba(0,0,0,0.25)]'
-                                  }`}
-                                placeholder="Add Notes..."
-                                rows={4}
-                              />
-
-                              {/* Attachment Section */}
-                              <div
-                                className="w-1/4 flex flex-col justify-center items-center py-4 pl-2 border-dotted border-4 border-blue-500 rounded-lg text-center"
-                                style={{ height: '100%' }}
-                              >
-                                {complianceAttachment.length > 0 ? (
-                                  <div className="flex flex-col items-center">
-                                    <img className="w-10" src="./file-icon.jpeg" alt="File Icon" />
-                                    <p className="text-sm text-blue-500 font-medium mb-2">
-                                      {'Document Attached'}
-                                    </p>
-                                    <button
-                                      className="px-8 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
-                                      onClick={() => {
-                                        if (complianceAttachment[0]) {
-                                          window.open(Constants.FILE_PATH_BASE_URL + complianceAttachment[0], '_blank');
-                                        }
-                                      }}
-                                    >
-                                      View Document
-                                    </button>
-                                  </div>
-                                ) : (
-                                  <div>
-                                    <input
-                                      type="file"
-                                      ref={complianceFileInputRef}
-                                      onChange={handleComplianceFileChange}
-                                      className="hidden"
-                                    />
-                                    <button
-                                      className={`px-8 py-1 rounded-xl ${edit ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                        }`}
-                                      disabled={!edit}
-                                      onClick={() => {
-                                        if (edit && complianceFileInputRef.current) {
-                                          complianceFileInputRef.current.click();
-                                        }
-                                      }}
-                                    >
-                                      Upload Document
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </Th>
-                        </Tr>
-                      </Tbody>
-                    </Table>
+        </div>
+      </Th>
+    </Tr>
+  </Tbody>
+</Table>
 
 
 
 
 
-                  </>}
-                {uploadedDocuments.length > 0 && !loading && (
-                  <>
-                    <div style={{ width: '100%', height: 1, backgroundColor: 'GrayText' }}></div>
-                    <div className="font-bold text-base py-6">
-                      User Uploaded Documents
-                    </div>
-                    <table className="w-full text-sm text-left rounded-md border-2 border-[#5b5b5b]">
-                      <thead>
-                        <tr style={{ background: '#D9D9D9' }}>
+                    </>}
+                  {uploadedDocuments.length > 0 && !loading && (
+                    <>
+                      <div style={{ width: '100%', height: 1, backgroundColor: 'GrayText' }}></div>
+                      <div className="font-bold text-base py-6">
+                        User Uploaded Documents
+                      </div>
+                      <table className="w-full text-sm text-left rounded-md border-2 border-[#5b5b5b]">
+                        <thead>
+                        <tr style={{background: '#D9D9D9' }}>
                           <th className='py-2 px-2 border-r-2 border-[#5b5b5b]'>Sno</th>
                           <th className='py-2 px-2 border-r-2 border-[#5b5b5b]'>Notes</th>
                           <th className='py-2 px-2 border-r-2 border-[#5b5b5b]'>Document</th>
                         </tr>
-                      </thead>
-                      {uploadedDocuments.map((document, index) => {
-                        return (
-                          <tr key={index}>
-                            <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'>{index + 1}</td>
-                            <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'>{document.notes}</td>
-                            <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'><a rel="noopener noreferrer" target="_blank"
-                              href={Constants.FILE_PATH_BASE_URL + document.document}> View
-                              Document</a></td>
-                          </tr>
-                        );
-                      })}
-                    </table>
-                  </>)}
+                        </thead>
+                        {uploadedDocuments.map((document, index) => {
+                          return (
+                            <tr key={index}>
+                              <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'>{index + 1}</td>
+                              <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'>{document.notes}</td>
+                              <td className='py-2 px-2 border-r-2 border-[#5b5b5b]'><a rel="noopener noreferrer" target="_blank"
+                                     href={Constants.FILE_PATH_BASE_URL + document.document}> View
+                                Document</a></td>
+                            </tr>
+                          );
+                        })}
+                      </table>
+                    </>)}
 
-                {adminRequestedAttachments.length > 0 && !loading && (
-                  <>
-                    <div style={{ width: '100%', height: 1, backgroundColor: 'GrayText' }}></div>
-                    <div className="font-bold text-base py-6">
-                      Admin Requested Documents
-                    </div>
-                    <table className="w-full text-sm text-left rounded-md border-2 border-[#5b5b5b] mb-10">
-                      <thead>
-                        <tr style={{ background: '#D9D9D9' }}>
+                  {adminRequestedAttachments.length > 0 && !loading && (
+                    <>
+                      <div style={{ width: '100%', height: 1, backgroundColor: 'GrayText' }}></div>
+                      <div className="font-bold text-base py-6">
+                        Admin Requested Documents
+                      </div>
+                      <table className="w-full text-sm text-left rounded-md border-2 border-[#5b5b5b] mb-10">
+                        <thead>
+                        <tr style={{background: '#D9D9D9' }}>
                           <th className='py-2 px-2 border-r-2 border-[#5b5b5b]'>Sno</th>
                           <th className='py-2 px-2 border-r-2 border-[#5b5b5b]'>Document Type</th>
                           <th className='py-2 px-2'>User Document</th>
@@ -940,21 +906,21 @@ function DebitTransactions() {
           }
           scrollableTarget="scrollableDiv"
         >
-          <div className="overflow-x-auto w-full">
-            <table className="table-auto min-w-full text-sm text-left">
+         <div className="overflow-x-auto w-full">
+  <table className="table-auto min-w-full text-sm text-left">
 
-              <thead className="border-b-2">
-                <tr>
-                  <th scope="col" className="px-4 py-6">Transaction ID</th>
-                  <th scope="col" className="px-4 py-2">Date & Time</th>
-                  <th scope="col" className="px-4 py-2">Sender</th>
-                  <th scope="col" className="px-4 py-2">Receiver</th>
-                  <th scope="col" className="px-4 py-2">Sending Amount</th>
-                  <th scope="col" className="px-4 py-2">Receiving Amount</th>
-                  <th scope="col" className="px-4 py-2">Status</th>
-                  <th scope="col" className="px-4 py-2">Details</th>
-                </tr>
-                <tr>
+            <thead className="border-b-2">
+            <tr>
+              <th scope="col" className="px-4 py-6">Transaction ID</th>
+              <th scope="col" className="px-4 py-2">Date & Time</th>
+              <th scope="col" className="px-4 py-2">Sender</th>
+              <th scope="col" className="px-4 py-2">Receiver</th>
+              <th scope="col" className="px-4 py-2">Sending Amount</th>
+              <th scope="col" className="px-4 py-2">Receiving Amount</th>
+              <th scope="col" className="px-4 py-2">Status</th>
+              <th scope="col" className="px-4 py-2">Details</th>
+            </tr>
+            <tr>
                   <th scope="col" className="px-4 py-6">
                     <input
                       type="text"
@@ -1033,61 +999,61 @@ function DebitTransactions() {
                     </button>
                   </th>
                 </tr>
-              </thead>
-              <tbody>
-                {transactions.map((beneficiary) => {
-                  const meta = beneficiary.meta;
-                  // const senderName = beneficiary.type == 'debit' ? meta.second_beneficiary_name : meta.sender_name;
-                  // let splittedSender = senderName.split(";;");
-                  const receivingAmount = meta.recipient_amount || 'N/A';
-                  const receivingCurrency = meta.exchange_currency || 'N/A';
-                  const color = beneficiary.type === 'debit' ? 'bg-gray-400 text-black' : 'bg-green-100 text-green-500';
-                  return (
-                    <>
-                      <tr key={beneficiary.id}>
-                        <td scope="row" className="px-6 py-4 font-bold">
-                          <div className="flex items-center space-x-2">
-                            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${color}`}>
-                              {beneficiary.type === 'debit' ? (
-                                <FiArrowUpRight fontSize="25px" />
-                              ) : beneficiary.type === null || beneficiary.type === '' || beneficiary.type === 'individual' ? (
-                                <MdOutlineCurrencyExchange fontSize="25px" />
-                              ) : (
-                                <FiArrowDownLeft fontSize="25px" />
-                              )}
-                            </div>
-                            <div>
-                              <span className="text-[#205FFF]">{beneficiary.id}</span>
-                              <div className="border-b-2 border-[#205FFF]"></div>
-                            </div>
-                          </div>
-                        </td>
+            </thead>
+            <tbody>
+            {transactions.map((beneficiary) => {
+              const meta = beneficiary.meta;
+              // const senderName = beneficiary.type == 'debit' ? meta.second_beneficiary_name : meta.sender_name;
+              // let splittedSender = senderName.split(";;");
+              const receivingAmount = meta.recipient_amount || 'N/A';
+              const receivingCurrency = meta.exchange_currency || 'N/A';
+              const color = beneficiary.type === 'debit' ? 'bg-gray-400 text-black' : 'bg-green-100 text-green-500';
+              return (
+                <>
+                  <tr key={beneficiary.id}>
+                  <td scope="row" className="px-6 py-4 font-bold">
+              <div className="flex items-center space-x-2">
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full ${color}`}>
+                  {beneficiary.type === 'debit' ? (
+                    <FiArrowUpRight fontSize="25px" />
+                  ) : beneficiary.type === null || beneficiary.type === '' || beneficiary.type === 'individual' ? (
+                    <MdOutlineCurrencyExchange fontSize="25px" />
+                  ) : (
+                    <FiArrowDownLeft fontSize="25px" />
+                  )}
+                </div>
+                <div>
+                  <span className="text-[#205FFF]">{beneficiary.id}</span>
+                  <div className="border-b-2 border-[#205FFF]"></div>
+                </div>
+              </div>
+              </td>
 
-                        <td
-                          className="px-4 py-2 font-bold">{new Date(beneficiary.created_at).getDate() + '-' + (new Date(beneficiary.created_at).getMonth() + 1) + '-' + new Date(beneficiary.created_at).getFullYear()}</td>
-                        <td className="px-4 py-2 font-bold">{meta.sender_name}</td>
-                        <td className="px-4 py-2 font-bold">{beneficiary.workspace.name}</td>
-                        <td
-                          className="px-4 py-2 font-bold">{getCurrencySymbol(beneficiary.settled_currency)} {numberWithCommas(parseFloat(beneficiary.amount).toFixed(2))}</td>
-                        <td
-                          className="px-4 py-2 font-bold">{receivingAmount && getCurrencySymbol(receivingCurrency)} {numberWithCommas(parseFloat(receivingAmount).toFixed(2))}
-                        </td>
-                        <td className="px-4 py-2 font-bold">
+                    <td
+                      className="px-4 py-2 font-bold">{new Date(beneficiary.created_at).getDate() + '-' + (new Date(beneficiary.created_at).getMonth() + 1) + '-' + new Date(beneficiary.created_at).getFullYear()}</td>
+                    <td className="px-4 py-2 font-bold">{meta.sender_name}</td>
+                    <td className="px-4 py-2 font-bold">{beneficiary.workspace.name}</td>
+                    <td
+                      className="px-4 py-2 font-bold">{getCurrencySymbol(beneficiary.settled_currency)} {numberWithCommas(parseFloat(beneficiary.amount).toFixed(2))}</td>
+                    <td
+                      className="px-4 py-2 font-bold">{receivingAmount && getCurrencySymbol(receivingCurrency)} {numberWithCommas(parseFloat(receivingAmount).toFixed(2))}
+                    </td>
+                    <td className="px-4 py-2 font-bold">
 
-                          {beneficiary.meta.status ?? beneficiary.status}
-                        </td>
-                        <td className="px-4 py-2">
-                          <button className="view-details-btn font-semibold rounded-full text-white px-4 py-2 whitespace-nowrap" onClick={() => {
-                            navigatetotransaction(beneficiary.payment_method, beneficiary.meta, new Date(beneficiary.created_at).getDate() + '-' + (new Date(beneficiary.created_at).getMonth() + 1) + '-' + new Date(beneficiary.created_at).getFullYear(), beneficiary.id, beneficiary);
-                          }}>View Details
-                          </button>
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+                      {beneficiary.meta.status ?? beneficiary.status}
+                    </td>
+                    <td className="px-4 py-2">
+                      <button className="view-details-btn font-semibold rounded-full text-white px-4 py-2 whitespace-nowrap" onClick={() => {
+                        navigatetotransaction(beneficiary.payment_method, beneficiary.meta, new Date(beneficiary.created_at).getDate() + '-' + (new Date(beneficiary.created_at).getMonth() + 1) + '-' + new Date(beneficiary.created_at).getFullYear(), beneficiary.id, beneficiary);
+                      }}>View Details
+                      </button>
+                    </td>
+                  </tr>
+                </>
+              );
+            })}
+            </tbody>
+          </table>
           </div>
         </InfiniteScroll>
         {loading &&

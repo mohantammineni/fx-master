@@ -183,13 +183,29 @@ function SelfAccount() {
 
 
     return (
-        <div className="my-2">
+        <div className="flex items-center justify-center w-full h-full bg-white">
+        <div className="bg-white rounded-lg w-full max-w-md shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
             <ToastContainer />
+            <div className='flex justify-between items-center w-full border-b p-4 border-[#E7E3E3]'>
             <span className="text-lg font-semibold">Add Beneficiary</span>
+            <span><button onClick={() =>
+  navigate('/BeneficiaryTypes', {
+    state: {
+      currency,
+      currencyid,
+      transferflowamount,
+      balance,
+      routeName
+    }
+  })
+} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  Back
+</button></span></div>
+<div className='px-6'>
             <div className='my-3 mx-1 flex'>
                 {countries.length > 0 && currencyid != 105 &&
                     (<select
-                        className="pl-8 w-1/4 p-2 outline-none rounded-2xl text-[#205FFF]"
+                        className="pl-8 w-1/4 p-2 outline-none rounded-md bg-[#EAEAEA] w-full text-[#205FFF]"
                         onChange={(e) => {
                             setbeneCountry(e.target.value)
                             getBeneFields(beneType, e.target.value)
@@ -205,9 +221,9 @@ function SelfAccount() {
             </div>
             {currencyid != 105 ?
                 currencyid == 231 ?
-                (beneCountry != 'UK' && beneCountry != 'GB') ?
+                    beneCountry != 'UK' && beneCountry != 'GB') ?
                         <div className='my-3 mx-1 flex'>
-                            <select className="pl-8 w-1/4 p-2 outline-none rounded-2xl text-[#205FFF]" onChange={(e) => {
+                            <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF]" onChange={(e) => {
                                 if (e.target.value == 'priority') {
                                     getBeneFields('priority', beneCountry)
                                 }
@@ -222,7 +238,7 @@ function SelfAccount() {
                         : ''
                     :
                     <div className='my-3 mx-1 flex'>
-                        <select className="pl-8 w-1/4 p-2 outline-none rounded-2xl text-[#205FFF]" onChange={(e) => {
+                        <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF]" onChange={(e) => {
                             if (e.target.value == 'priority') {
                                 getBeneFields('priority', beneCountry)
                             }
@@ -246,7 +262,7 @@ function SelfAccount() {
                             type={field.type}
                             required={field.is_required}
                             placeholder={field.label}
-                            className="pl-8  w-1/4 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                            className="pl-8  w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
                             onChange={(e) => {
                                 setbankDetails({ ...bankDetails, [formKeys[index]]: e.target.value })
                             }}
@@ -263,13 +279,15 @@ function SelfAccount() {
                     :
                     formFeilds.length > 0 &&
                     <button onClick={submitHandler}
-                        className="bg-[#1152BE] border border-[#1152BE] text-white px-6 py-2 rounded-lg flex items-center text-base">
-                        Add
+                        className="bg-[#205FFF] border w-full border-[#205FFF] text-white px-6 py-2 rounded-md">
+                        Proceed
                     </button>
 
                 }
             </div>
         </div>
+    </div>
+    </div>
     );
 }
 

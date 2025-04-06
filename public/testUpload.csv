@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 type,first_name,last_name,reason,amount,mobile,bank_country_name,bank_code_type,bank_account_name,code,bank_account_number,beneficiary_address,company_name,currency,date_of_birth
+=======
+type,first_name,last_name,reason,amount,mobile,bank_country_name,bank_code_type,bank_account_name,code,bank_account_number,beneficiary_address,company_name,currency
+>>>>>>> UIChanges
 individual / business,test name,name,test reason,10,7779998800,United States,"sort_code,
 bsb_code,
 institution_no,
@@ -8,4 +12,8 @@ aba,
 clabe,
 cnaps,
 ifsc,
+<<<<<<< HEAD
 bic",test name,123456,89745623,address,test company,GBP,dd-mm-yyyy
+=======
+bic",test name,123456,89745623,address,test company,GBP
+>>>>>>> UIChanges

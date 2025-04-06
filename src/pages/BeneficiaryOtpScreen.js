@@ -79,16 +79,36 @@ function BeneficiaryOtpScreen() {
         setLoading(false);
     };
     return (
-        <div className="my-2">
+        <div className="flex items-center justify-center w-full h-full bg-white">
+        <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
             <ToastContainer />
-            <span className="text-lg font-semibold">Enter OTP</span>
+            <div className='flex justify-between items-center w-full'>
+            <span className="text-lg font-semibold">OTP Verification</span>
+            <span><button onClick={() =>
+  navigate('/BeneficiaryTypes', {
+    state: {
+      currency,
+      currencyid,
+      transferflowamount,
+      balance,
+      routeName
+    }
+  })
+} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  Back
+</button></span></div>
+<div className='text-center'>
+           <img src="./password-lock.png" className="mx-auto" />
+           <div className='text-[#3A3A3A] mt-4'>Enter the OTP sent to</div>
+           <span className='text-[#205FFF] font-bold border-b border-[#205FFF]'>+44 789 675 4321</span>
             <div className='flex'>
                 <div className='my-3 mx-2'>
                     <input
                         type='number'
                         value={f1}
                         id='f1'
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                         placeholder=''
+                        className="w-12 p-2 text-black font-bold border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF1(e.target.value[0]);
                             if(e.target.value && e.target.value[0].length>0){
@@ -102,7 +122,8 @@ function BeneficiaryOtpScreen() {
                         type='number'
                         id='f2'
                         value={f2}
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                         placeholder=''
+                        className="w-12 p-2 text-black font-bold border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF2(e.target.value[0]);
                             if(e.target.value && e.target.value[0].length>0){
@@ -120,7 +141,8 @@ function BeneficiaryOtpScreen() {
                         type='number'
                         value={f3}
                         id='f3'
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                         placeholder=''
+                        className="w-12 p-2 text-black font-bold outline-none border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF3(e.target.value[0]);
                             if(e.target.value && e.target.value[0].length>0){
@@ -138,7 +160,8 @@ function BeneficiaryOtpScreen() {
                         type='number'
                         value={f4}
                         id='f4'
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                         placeholder=''
+                        className="w-12 p-2 text-black font-bold outline-none border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF4(e.target.value[0]);
                             if(e.target.value && e.target.value[0].length>0){
@@ -156,7 +179,8 @@ function BeneficiaryOtpScreen() {
                         type='number'
                         value={f5}
                         id='f5'
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                         placeholder=''
+                        className="w-12 p-2 text-black font-bold outline-none border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF5(e.target.value[0]);
                             if(e.target.value && e.target.value[0].length>0){
@@ -174,7 +198,8 @@ function BeneficiaryOtpScreen() {
                         type='number'
                         value={f6}
                         id='f6'
-                        className="pl-8 w-20 p-2 outline-none rounded-2xl text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                        placeholder=''
+                        className="w-12 p-2 text-black font-bold outline-none border-b border-[#2743FD]"
                         onChange={(e) => {
                             setF6(e.target.value[0]);
                             if(!e.target.value || e.target.value[0].length==0){
@@ -184,6 +209,7 @@ function BeneficiaryOtpScreen() {
                     />
                 </div>
             </div>
+            <div className='text-[#707070] mb-4'>Didn&apos;t you receive the OTP? <span className='text-[#1D3BFF]'>Resend OTP</span></div>
             <div className='my-3'>
 
                 {loading ? (
@@ -191,11 +217,13 @@ function BeneficiaryOtpScreen() {
                 )
                     :
                     <button onClick={otpValidate}
-                        className="bg-[#1152BE] border border-[#1152BE] text-white px-6 py-2 rounded-lg flex items-center text-base">
-                        Add
+                        className="bg-[#205FFF] w-full border border-[#205FFF] font-semibold text-white px-6 py-2 rounded-md">
+                        Verify OTP
                     </button>}
             </div>
+        </div> 
         </div>
+    </div>
     );
 }
 

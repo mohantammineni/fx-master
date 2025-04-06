@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> UIChanges
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import axios from "axios";
@@ -7,15 +11,19 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { FiSearch } from 'react-icons/fi';
+<<<<<<< HEAD
 import { ToastContainer, toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 import { Table, Tbody, Th, Tr } from "react-super-responsive-table";
+=======
+>>>>>>> UIChanges
 
 function Membership() {
   const navigate = useNavigate();
   const [memberships, setMemberships] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState('');
+<<<<<<< HEAD
   const [kycLoading, setkycLoading] = useState(false);
   const [loadingid, setloadingid] = useState(0);
   const [show, setShow] = useState(false);
@@ -27,6 +35,8 @@ function Membership() {
   const [membershipNo, setmembershipNo] = useState();
   const [membershipDocuments, setmembershipDocuments] = useState([]);
   const [docLoading, setDocLoading] = useState(false);
+=======
+>>>>>>> UIChanges
   useEffect(() => {
     getData()
   }, [])
@@ -175,6 +185,7 @@ function Membership() {
                         <th scope="col" className="px-4 py-2">Phone</th>
                         <th scope="col" className="px-4 py-2">Type</th>
                         <th scope="col" className="px-4 py-2">Account Details</th>
+<<<<<<< HEAD
                         <th scope="col" className="px-4 py-2">Rekyc</th>
                         <th scope="col" className="px-4 py-2">Action</th>
                       </tr>
@@ -202,10 +213,33 @@ function Membership() {
                             <MenuButton><HiOutlineCog6Tooth className="text-lg font-bold" /></MenuButton>
                             <MenuItems anchor="bottom" className="rounded mt-2  text-[#ffffff]">
                               {/* <MenuItem key="edit" className="px-6 py-1 hover:bg-none">
+=======
+                        <th scope="col" className="px-4 py-2">Action</th>
+                      </tr>
+                    </thead>}
+                  {item.user_account != 'virtual_account' &&
+                    <tr key={item.memershipNo} >
+                      <th scope="row" className="px-4 py-2 font-bold whitespace-nowrap">{item.memershipNo}</th>
+                      <td className="px-4 py-2 font-bold">{item.name}</td>
+                      <td className="px-4 py-2 font-bold">{item.email}</td>
+                      <td className="px-4 py-2 font-bold">{item.phone}</td>
+                      <td className="px-4 py-2 font-bold">{item.type}</td>
+                      <td className="px-4 py-2 font-bold">
+                        Account No: <b>{JSON.parse(item.clearbank_meta).bank[0].WalletNumber}</b><br />
+                        Sort Code: <b>{JSON.parse(item.clearbank_meta).bank[0].sortCode}</b><br />
+                        IBAN: <b>{JSON.parse(item.clearbank_meta).bank[0].IBAN}</b>
+                      </td>
+                      <td className="px-4 py-2 font-bold">
+                        <Menu>
+                          <MenuButton><HiOutlineCog6Tooth className="text-lg font-bold" /></MenuButton>
+                          <MenuItems anchor="bottom" className="rounded mt-2  text-[#ffffff]">
+                            {/* <MenuItem key="edit" className="px-6 py-1 hover:bg-none">
+>>>>>>> UIChanges
                             <a className="block" href="javascript:void(0);" onClick={()=>navigate('/memberships/show')}>
                               Show
                             </a>
                           </MenuItem> */}
+<<<<<<< HEAD
                              {/* <MenuItem key="create_virtual_account" className="px-6 py-3 hover:bg-none bg-[#1152BE]">
                                 <a className="block" href="javascript:void(0);" onClick={() => navigate('/userDetails', { state: { account_id: item.customer_id } })}>
                                   Create Virtual Account
@@ -244,6 +278,35 @@ function Membership() {
                           </Menu>
                         </td>
                       </tr>
+=======
+                            <MenuItem key="create_virtual_account" className="px-6 py-3 hover:bg-none bg-[#1152BE]">
+                              <a className="block" href="javascript:void(0);" onClick={() => navigate('/userDetails', { state: { account_id: item.customer_id } })}>
+                                Create Virtual Account
+                              </a>
+                            </MenuItem>
+
+                            <MenuItem key="list_accounts" className="px-6 py-3 hover:bg-none bg-[#1152BE]">
+                              <a className="block" href="javascript:void(0);" onClick={() => navigate('/ListUsers', { state: { account_id: item.customer_id } })}>
+                                List Accounts
+                              </a>
+                            </MenuItem>
+
+                            <MenuItem key="fees" className="px-6 py-3 hover:bg-none bg-[#1152BE]">
+                              <a className="block" href="javascript:void(0);" onClick={() => navigate('/SetFees', { state: { admin_id: item.admin_id } })}>
+                                Fees
+                              </a>
+                            </MenuItem>
+
+                            <MenuItem key="on_behalf_of" className="px-6 py-3 hover:bg-none bg-[#1152BE]">
+                              <a className="block" href="javascript:void(0);" onClick={() => onbehalfOf(item.admin_id)}>
+                                On Behalf Of
+                              </a>
+                            </MenuItem>
+                          </MenuItems>
+                        </Menu>
+                      </td>
+                    </tr>
+>>>>>>> UIChanges
                   }
                 </>
               )
@@ -298,6 +361,7 @@ function Membership() {
     );
   }
 
+<<<<<<< HEAD
   const rekyc = async (user_id, user_mobile) => {
     if (confirm('Please confirm to reinitiate the kyc.')) {
       setkycLoading(true)
@@ -580,6 +644,10 @@ function Membership() {
 
 
 
+=======
+  return (
+    <div className="my-2">
+>>>>>>> UIChanges
       <div className="flex items-center justify-between py-4 mb-4">
         <div className="flex items-center ml-1">
           <span className="font-bold text-lg pl-3">Memberships</span>

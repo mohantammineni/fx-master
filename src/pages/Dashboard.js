@@ -233,7 +233,7 @@ function Dashboard() {
     getBalances(addWalletCurrency);
   }
   return (
-    <div className="my-2">
+    <div className="py-2 bg-[#eeedeb]">
 
       <Dialog open={openPopUp} onClose={() => onClose()} className="relative z-10">
         <DialogBackdrop className="fixed inset-0 bg-gray-500/20 transition-opacity" />
@@ -323,7 +323,8 @@ function Dashboard() {
               style={{ borderColor: "#EEEDEB" }}>
               Account Details
             </div>
-
+            {loading ?
+              <div className="text-center py-12">Loading...</div> :
             <div className="divide-y" style={{ borderColor: "#EEEDEB" }}>
               {/* Row 1: Account Name */}
               {accountName && (
@@ -347,6 +348,7 @@ function Dashboard() {
                 </div>
               )}
             </div>
+            }
           </div>
 
 
@@ -363,28 +365,28 @@ function Dashboard() {
             <span className="font-medium text-lg border-l-4 border-l-[#F4CE14] pl-3">Wallets</span>
 
             <div className="flex space-x-2">
-              {/* <Link to="/send"
-                    className="border border-[#1152BE] text-[#1152BE] px-6 py-1 rounded-lg font-semibold">
+              <Link to="/Pay"
+                    className="border border-[#205FFF] text-[#205FFF] px-6 py-2 font-bold rounded-lg mx-2">
                 Send
               </Link>
-              <Link to="/convert"
-                    className="border border-[#1152BE] text-[#1152BE] px-6 py-1 rounded-lg font-semibold">
+              <Link to="/Conversions"
+                    className="border border-[#205FFF] text-[#205FFF] px-6 py-2 font-bold rounded-lg mx-2">
                 Convert
-              </Link> */}
-              <button onClick={addWallet} className="border border-[#205FFF] text-[#205FFF] px-6 py-2 font-bold rounded-lg mx-2">Add Wallet</button>
+              </Link>
+              <button onClick={addWallet} className="border border-[#205FFF] text-[#205FFF] px-6 py-2 font-bold rounded-lg mx-2">+ Add Currency</button>
             </div>
           </div>
 
           <div className={`flex overflow-x-auto space-x-5 px-4 py-4 w-full ${balanceLoading || loading ? 'justify-center' : ''}`}>
             {balanceLoading || loading ?
               <div className="text-center py-12">Loading balances...</div> : balances.map((resp, index) => {
-                const splitflag = (resp.meta.flag || '').split('/');
-                const flagname = splitflag.length > 1 ? Constants.FXMASTER_BASE_URL + 'flags/' + splitflag[splitflag.length - 1] : '';
+                const splitflag = (resp?.meta?.flag || '').split('/');
+                const flagname = splitflag?.length > 1 ? Constants.FXMASTER_BASE_URL + 'flags/' + splitflag[splitflag?.length - 1] : '';
                 const data = {
                   currency: resp.currency,
                   balance: resp.currency != null && resp.currency != '' && Object.prototype.hasOwnProperty.call(usedBalances, resp.currency) ? numberWithCommas(parseFloat((resp.balance - usedBalances[resp.currency]) < 0 ? '0' : resp.balance - usedBalances[resp.currency]).toFixed(2)) : numberWithCommas(parseFloat(resp.balance).toFixed(2)),
                   flag: flagname,
-                  currencyid: resp.meta.country_id,
+                  currencyid: resp.meta?.country_id,
                   accountNumber: accountNumber,
                   sortcode: sortcode,
                   accountName: accountName
@@ -401,7 +403,7 @@ function Dashboard() {
                           :
                           <img src={flagname}></img>
                         } */}
-                          {getCountryInfo(resp.currency, { className: "w-10 h-10" }).flag}
+                          {getCountryInfo(resp.currency, { className: "w-10 h-10" })?.flag}
                         </div>
                         <span className="font-semibold">{resp.currency}</span>
                       </div>

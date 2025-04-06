@@ -47,10 +47,8 @@ export default function Layout() {
       <div className="flex h-[calc(100vh-87.11px)] overflow-hidden">
         {/* Pass toggle logic to the sidebar */}
         <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="flex-1 flex flex-col bg-slate-200 overflow-hidden">
-          <div className="flex-1 p-4 overflow-auto">
-            <Outlet />
-          </div>
+        <div className="flex-1 p-4 overflow-auto">
+         <Outlet />
         </div>
       </div>
     </>

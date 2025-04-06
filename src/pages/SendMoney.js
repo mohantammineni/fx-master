@@ -6,6 +6,7 @@ import Beneficiary from './Beneficiaries/Beneficiary';
 import  getCurrencySymbol, { getCountryInfo } from '../lib/currenyUtils';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FiSearch } from 'react-icons/fi';
 
 
 function SendMoney() {
@@ -216,10 +217,12 @@ function SendMoney() {
   // function numberWithCommas(x) {
   //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // }
+
+ 
   return (
     <div className="my-2">
       <ToastContainer />
-      <div className="rounded-3xl shadow-lg p-6 bg-white w-full">
+      <div className="rounded-3xl p-6 bg-white w-full" style={{boxShadow :'0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}}>
   
   {/* First Row - Currency & Beneficiary Name */}
   <div className="flex justify-between items-center">
@@ -241,12 +244,11 @@ function SendMoney() {
 
 
     {/* Right - Beneficiary Name */}
-    {selectedbeneficiary && 
     <div className="flex items-center">
+    {selectedbeneficiary ? (<>
       <h3 className="text-sm text-gray-600">Beneficiary Name:</h3>
-      <span className="text-sm font-bold ml-2">{selectedbeneficiary || "None"}</span>
+      <span className="text-sm font-bold ml-2">{selectedbeneficiary || "None"}</span></>):<></>}
     </div>
-    }
   </div>
 
   {/* Second Row - Input and Button (Inside same container) */}
@@ -258,21 +260,27 @@ function SendMoney() {
       <span className="absolute left-3 text-lg font-semibold text-[#205FFF]">
         {currency} 
       </span>
-      <input
-        id="amount"
-        type="number"
-        min="0"
-        value={amount}
-        placeholder="Enter Amount"
-        style={{ paddingLeft: `${currency.length * 10 + 25}px` }}
-        className="w-full p-2 outline-none border rounded-md text-[#205FFF] placeholder:text-sm placeholder:text-gray-500"
-        onChange={(e) => {
-          const validated = (e.target.value).match(/^(\d*\.{0,1}\d{0,2}$)/);
-          if (validated) {
-            setAmount(Math.abs(validated[0]));
-          }
-        }}
-      />
+      
+
+<input
+  id="amount"
+  type="number"
+  min="0"
+  value={amount}
+  placeholder="Enter Amount"
+  style={{ paddingLeft: `${currency?.length * 10 + 25}px` }}
+  className="w-full p-2 outline-none border border-[#DEDCE1] rounded-md text-[#205FFF] 
+             placeholder:text-sm placeholder:text-[#ADB0B7] focus:ring-0 focus:border-[#DEDCE1] 
+             active:border-[#DEDCE1] hover:border-[#DEDCE1]"
+  onChange={(e) => {
+    const validated = (e.target.value).match(/^(\d*\.{0,1}\d{0,2}$)/);
+    if (validated) {
+      setAmount(Math.abs(validated[0]));
+    }
+  }}
+/>
+
+  
     </div>
 
     {/* Proceed Button (Aligned with Beneficiary Name) */}
@@ -292,19 +300,36 @@ function SendMoney() {
 
 
 
+<div className="flex items-center justify-between py-4 mb-4">
+  {/* Beneficiary Heading - Left Aligned */}
+  <div className="flex items-center">
+    <p className="font-bold text-lg pb-2">Select Beneficiary</p>
+  </div>
 
-      <div className="flex items-center justify-between py-4 mb-4">
-        <div className="flex items-center m-5">
-          <p className="font-bold text-lg pb-2">Select Beneficiary</p>
-        </div>
-        <div className="flex space-x-4">
-          <button onClick={() => navigate("/BeneficiaryTypes", { state: { currency: currency, transferflowamount: amount, currencyid: currencyid, balance: balance } })}
-            className="bg-white border border-[#1152BE] text-[#1152BE] font-semibold px-6 py-2 rounded-lg flex items-center text-base">
-            + Add Beneficiary
-          </button>
-        </div>
-      </div>
-      <div className="mt-6">
+  <div className="flex items-center gap-4">
+    <div className="relative w-64">  
+      <input
+        type="text"
+        placeholder="Search Beneficiary"
+        className="w-full pl-4 pr-10 py-2 text-sm rounded-md shadow-sm 
+                   bg-[#EAE8E8] focus:outline-none focus:ring-2 
+                   focus:ring-blue-500 focus:border-transparent bg-white 
+                   placeholder:text-[#303644]"
+      />
+      <FiSearch className="absolute top-2.5 right-4 text-[#303644]" /> 
+    </div>
+
+   <button 
+      onClick={() => navigate("/BeneficiaryTypes", { state: { currency, transferflowamount: amount, currencyid, balance } })}
+      className="bg-white border border-[#1152BE] text-[#1152BE] font-semibold 
+                 px-6 py-2 rounded-lg flex items-center text-base">
+      + Add Beneficiary
+    </button>
+  </div>
+</div>
+
+
+      <div>
         {loading ? (
           <div className="text-center">Loading beneficiaries...</div>
         ) : (

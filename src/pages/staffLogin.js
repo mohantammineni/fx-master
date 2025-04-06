@@ -93,7 +93,7 @@ export default function StaffLogin() {
       <div className="w-1/2 flex flex-col justify-center items-start p-8 border-l">
         {/* Logo */}
         <div className="mb-4">
-          <img src="fx_logo.png" alt="Logo" className="w-24" />
+          <img src="fx_logo.png" alt="Logo" className="w-[120px]" />
         </div>
 
         {/* Welcome Back */}

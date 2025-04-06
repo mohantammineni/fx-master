@@ -10,6 +10,7 @@ function ContactInformation() {
   const [email, setEmail] = useState()
   const [mobile, setmobile] = useState()
   const [message, setmessage] = useState()
+  
   const sendEmail = async () => {
     if (firstName != "" && firstName != null && lastName != "" && lastName != null && email != "" && email != null && mobile != "" && mobile != null && message != "" && message != null) {
       await axios.post(Constants.BASE_URL + 'API-FX-193-CONTACTUS', {
@@ -36,11 +37,11 @@ function ContactInformation() {
     }
   }
   return (
-    <div className="flex flex-col lg:flex-row gap-8 bg-white rounded-2xl overflow-hidden">
+    <div className="flex flex-col lg:flex-row gap-8 border border border-black bg-white rounded-2xl overflow-hidden">
       {/* Left Column: Contact Information */}
       <div className="lg:w-2/5 p-2 relative"> 
         <div className="bg-[#FFC92E] rounded-2xl p-8 w-full relative overflow-hidden"> 
-          <h2 className="text-3xl font-poppins font-semibold mb-6 text-[#1052BC]">Contact Information</h2>
+          <h2 className="text-3xl font-montserrat font-semibold mb-6 text-[#1052BC]">Contact Information</h2>
           <p className="text-sm font-openSans text-black">
             Have questions or need assistance? Our friendly support team is here to help.
             Contact us via email, chat, or phone, and we’ll be happy to assist you.
@@ -50,19 +51,19 @@ function ContactInformation() {
           {/* Phone Number */}
           <div className="flex items-center mb-8">
             <img className="w-8 h-8" src="/business/phone-icon.png" />
-            <p className="text-base font-poppins ml-4">+44 20 8058 0967</p>
+            <p className="text-base font-openSans ml-4">+44 20 8058 0967</p>
           </div>
 
           {/* Email Address */}
           <div className="flex items-center mb-8">
             <img className="w-8 h-8" src="/business/email-icon.png" />
-            <p className="text-base font-poppins ml-4">admin@fxmaster.co.uk</p>
+            <p className="text-base font-openSans ml-4">admin@fxmaster.co.uk</p>
           </div>
 
           {/* Physical Address */}
           <div className="flex mb-12">
            <img className="w-8 h-8" src="/business/location-icon.png" />
-            <p className="text-base font-poppins ml-4">30 Churchill Place, Canary Wharf, <br /> E14 5RE London,<br /> United Kingdom</p>
+            <p className="text-base font-openSans ml-4">30 Churchill Place, Canary Wharf, <br /> E14 5RE London,<br /> United Kingdom</p>
           </div>
 
           {/* Social Icons */}
@@ -157,93 +158,96 @@ function ContactInformation() {
 
         {/* Select Subject */}
         <div className="mb-4">
-          <label className="block text-lg font-semibold mb-2 text-custom-richblack" htmlFor="subject">Select Subject?</label>
-          <div className="flex gap-4">
-            {/* First Radio Button */}
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="radio"
-                name="subject"
-                value="general-inquiry"
-                className="hidden"
-                onChange={(e) => setSubject(e.target.value)}
-                checked={subject === 'general-inquiry'}
-              />
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center 
-                              ${subject === 'general-inquiry' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
-                {subject === 'general-inquiry' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
-                  </svg>
-                )}
-              </div>
-              <span className="ml-2 text-gray-900">General Inquiry</span>
-            </label>
+  <label className="block text-lg font-semibold mb-2 text-custom-richblack" htmlFor="subject">
+    Select Subject?
+  </label>
+  <div className="flex flex-col sm:flex-row gap-4">
+    {/* First Radio Button */}
+    <label className="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="subject"
+        value="general-inquiry"
+        className="hidden"
+        onChange={(e) => setSubject(e.target.value)}
+        checked={subject === 'general-inquiry'}
+      />
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center 
+                      ${subject === 'general-inquiry' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
+        {subject === 'general-inquiry' && (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
+          </svg>
+        )}
+      </div>
+      <span className="ml-2 text-gray-900">General Inquiry</span>
+    </label>
 
-            {/* Second Radio Button */}
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="radio"
-                name="subject"
-                value="support"
-                className="hidden"
-                onChange={(e) => setSubject(e.target.value)}
-                checked={subject === 'support'}
-              />
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center 
-                              ${subject === 'support' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
-                {subject === 'support' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
-                  </svg>
-                )}
-              </div>
-              <span className="ml-2 text-gray-900">Support</span>
-            </label>
+    {/* Second Radio Button */}
+    <label className="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="subject"
+        value="support"
+        className="hidden"
+        onChange={(e) => setSubject(e.target.value)}
+        checked={subject === 'support'}
+      />
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center 
+                      ${subject === 'support' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
+        {subject === 'support' && (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
+          </svg>
+        )}
+      </div>
+      <span className="ml-2 text-gray-900">Support</span>
+    </label>
 
-            {/* Third Radio Button */}
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="radio"
-                name="subject"
-                value="feedback"
-                className="hidden"
-                onChange={(e) => setSubject(e.target.value)}
-                checked={subject === 'feedback'}
-              />
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center 
-                              ${subject === 'feedback' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
-                {subject === 'feedback' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
-                  </svg>
-                )}
-              </div>
-              <span className="ml-2 text-gray-900">Feedback</span>
-            </label>
+    {/* Third Radio Button */}
+    <label className="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="subject"
+        value="feedback"
+        className="hidden"
+        onChange={(e) => setSubject(e.target.value)}
+        checked={subject === 'feedback'}
+      />
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center 
+                      ${subject === 'feedback' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
+        {subject === 'feedback' && (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
+          </svg>
+        )}
+      </div>
+      <span className="ml-2 text-gray-900">Feedback</span>
+    </label>
 
-            {/* Fourth Radio Button */}
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="radio"
-                name="subject"
-                value="other"
-                className="hidden"
-                onChange={(e) => setSubject(e.target.value)}
-                checked={subject === 'other'}
-              />
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center 
-                              ${subject === 'other' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
-                {subject === 'other' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
-                  </svg>
-                )}
-              </div>
-              <span className="ml-2 text-gray-900">Other</span>
-            </label>
-          </div>
-        </div>
+    {/* Fourth Radio Button */}
+    <label className="flex items-center cursor-pointer">
+      <input
+        type="radio"
+        name="subject"
+        value="other"
+        className="hidden"
+        onChange={(e) => setSubject(e.target.value)}
+        checked={subject === 'other'}
+      />
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center 
+                      ${subject === 'other' ? 'bg-custom-richblack' : 'bg-custom-lightgray'}`}>
+        {subject === 'other' && (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clipRule="evenodd" />
+          </svg>
+        )}
+      </div>
+      <span className="ml-2 text-gray-900">Other</span>
+    </label>
+  </div>
+</div>
+
 
         {/* Text Area */}
         <div className="relative mb-4 mt-10"> 

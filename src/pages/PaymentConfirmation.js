@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Constants } from '../lib/const/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,9 +6,15 @@ import { getCountryInfo, getCurrencySymbol } from '../lib/currenyUtils';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getInitialsName } from '../lib/utils';
+import { Table, Tbody, Tr, Td } from 'react-super-responsive-table';
 
 
 function PaymentConfirmation() {
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = () => {
+    fileInputRef.current.click();
+  };
   const navigate = useNavigate();
   const location = useLocation();
   const paramsdata = location.state;
@@ -309,33 +315,126 @@ function PaymentConfirmation() {
   return (
     <div className="my-2">
       <ToastContainer />
-      <div className="bg-white rounded-xl shadow-lg p-6 space-y-6 w-full">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center justify-center">
-            <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-              {getInitialsName(name)}
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-semibold">{name}</span>
-              <span>{getCountryInfo(currency, {
-                className: "w-8 h-8"
-              }).flag}</span>
-            </div>
-            <p className="text-gray-500">{account}({ifsc})</p>
-          </div>
-        </div>
+      <div className="bg-white rounded-xl p-6 space-y-6 w-full" style={{boxShadow: '0px 0px 14.2px 0px rgba(0, 0, 0, 0.25)'}}>
+      <div className="flex justify-between items-center p-4">
+  {/* Left Column - User Details */}
+  <div className="flex items-center space-x-4">
+    {/* Profile Icon */}
+    <div className="flex items-center justify-center">
+      <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+        {getInitialsName(name)}
+      </div>
+    </div>
 
-        <div className="relative">
+    {/* Name & Account Details */}
+    <div>
+      <div className="flex items-center space-x-2">
+        <span className="text-lg font-semibold">{name}</span>
+        <span>
+          {getCountryInfo(currency, {
+            className: "w-5 h-5"
+          }).flag}
+        </span>
+      </div>
+      <p className="text-gray-500">{account} ({ifsc})</p>
+    </div>
+  </div>
+
+  {/* Right Column - Amount Display */}
+  <div className="text-right">
+    <p className="text-sm text-gray-500">Total Amount</p>
+    <p className="text-2xl font-semibold text-[#012646]">
+      {getCurrencySymbol(currency)} {numberWithCommas(amount)}
+    </p>
+  </div>
+</div>
+
+
+        {/* <div className="relative">
           <hr className="border-t border-dashed" />
           <div
             className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border rounded-full"></div>
-        </div>
+        </div> */}
+   <Table className="w-full text-sm text-left border border-gray-200 border-collapse">
+  <Tbody>
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+       Account Number
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-semibold text-base text-gray-900">
+      {account}({ifsc})
+      </Td>
+    </Tr>
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+      Type
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-semibold text-base text-gray-900">
+      {type}
+      </Td>
+    </Tr>
+    <Tr className="border-b border-[#B7B7B7]">
+      <Td className="w-[30%] border-r border-[#B7B7B7] px-4 py-2 text-base font-normal text-gray-600">
+       Country
+      </Td>
+      <Td className="w-[70%] px-4 py-2 font-semibold text-base text-gray-900">
+      {country}
+      </Td>
+    </Tr>
+    
+    </Tbody>
+    </Table>
+    <div 
+  className="flex items-center h-20 w-full p-4 border border-dashed border-[#C1BBBB] bg-[#F8F9FA] rounded-md cursor-pointer"
+  onClick={handleFileUpload}
+>
+  {/* Left Column: Icon (Right-aligned) */}
+  <div className="w-1/2 flex justify-end pr-3">
+    <img className="w-10" src="./cloud.png" alt="File Icon" />
+  </div>
 
+  {/* Right Column: Upload Text (Left-aligned) */}
+  <div className="w-1/2 flex justify-start">
+    <div>
+      <p className="text-[#2463CD] font-medium text-sm">Upload Attachment</p>
+      <p className="text-[#87888A] text-xs">Jpg, pdf or Png (max. 50mb)</p>
+    </div>
+  </div>
+
+  {/* Hidden File Input */}
+  <input type="file" ref={fileInputRef} className="hidden" />
+</div>
+
+
+
+
+    <div className='w-full'>
+    <textarea
+            value={ref}
+            onChange={(e) => setRef(e.target.value)}
+            className="p-2 w-full rounded-lg h-20 outline-none mr-4 text-sm placeholder:text-[#87888A] placeholder:font-normal resize-none w-3/4 bg-[#EAEAEA]"
+            placeholder="Payment referance"
+           
+          />
+    <select 
+  onChange={(e) => setReasonForTransfer(e.target.value)}
+  className="p-2 w-full h-20 rounded-lg outline-none text-sm text-[#87888A] placeholder:text-[#87888A] placeholder:font-normal bg-[#EAEAEA] resize-none"
+>
+  <option key={0} className="text-[#87888A]">Transfer Reason</option>
+  {
+    transferReasons.map((option) => (
+      <option key={option.id} value={option.reason} className="text-[#87888A]">
+        {option.reason}
+      </option>
+    ))
+  }
+</select>
+
+    </div>
+    <div>
         <div className="flex space-x-4">
 
-          <select onChange={(e) => setReasonForTransfer(e.target.value)}
+          {/* <select onChange={(e) => setReasonForTransfer(e.target.value)}
             className="w-1/2 p-2 border border-gray-300 rounded-lg bg-[#EAEAEA] text-[#707070] outline-0">
             <option key={0}>---Select Reason---</option>
             {
@@ -345,32 +444,31 @@ function PaymentConfirmation() {
                 );
               })
             }
-          </select>
+          </select> */}
 
-          <input
+          {/* <input
             id="ref"
             type="text"
             value={ref}
             placeholder="Payment Reference"
-            maxLength={35}
             className="pl-10 p-2 rounded-xl outline text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
             onChange={(e) => setRef(e.target.value)}
-          />
+          /> */}
 
-          <div className='font-bold'>
+          {/* <div className='font-bold'>
             Upload Attachment
             <input type='file' onChange={(event) => handleSingleFileChange(event)} className='font-normal' />
-          </div>
-          <input type='text' className="pl-10 p-2 rounded-xl outline text-[#205FFF] placeholder:text-sm placeholder:text-slate-700" placeholder='Enter Your Notes' onChange={(text) => setNotes(text.target.value)} />
+          </div> */}
+          {/* <input type='text' className="pl-10 p-2 rounded-xl outline text-[#205FFF] placeholder:text-sm placeholder:text-slate-700" placeholder='Enter Your Notes' onChange={(text) => setNotes(text.target.value)} /> */}
         </div>
 
-        <div className="relative">
+        {/* <div className="relative">
           <hr className="border-t border-dashed" />
           <div
             className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border rounded-full"></div>
-        </div>
+        </div> */}
 
-        <div className="flex space-x-16">
+        {/* <div className="flex space-x-16">
           <div>
             <span className="font-semibold block">Account No:</span>
             <span className="text-[#205FFF] font-bold">{account}({ifsc})</span>
@@ -387,22 +485,11 @@ function PaymentConfirmation() {
             <span className="font-semibold block">Amount:</span>
             <span className="text-[#205FFF] font-bold"> {getCurrencySymbol(currency)} {numberWithCommas(amount)}</span>
           </div>
-          {currency == 'GBP' && transacitonfees != "" && transacitonfees != null && amount != "" && amount != null &&
-            <>
-              <div>
-                <span className="font-semibold block">Transaction Fees:</span>
-                <span className="text-[#205FFF] font-bold"> {getCurrencySymbol(currency)}{parseFloat(amount * transacitonfees / 100).toFixed(2)}</span>
-              </div>
-              <div>
-                <span className="font-semibold block">Total Amount:</span>
-                <span className="text-[#205FFF] font-bold"> {getCurrencySymbol(currency)} {numberWithCommas(parseFloat(amount+(amount * transacitonfees / 100)).toFixed(2))}</span>
-              </div>
-            </>
-          }
-        </div>
+        </div> */}
+      </div>
 
         <div className="flex justify-center">
-          {defaultBank === 'Clear Bank as Service' && currencyid == 231 ?
+          {defaultBank === 'Clear Bank as Service' && currencyid == 231 && bank_type == 'clear_bank' ?
 
             buttonLoading ?
               <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
@@ -410,18 +497,18 @@ function PaymentConfirmation() {
               </button>
               :
               <button onClick={initiateTransaction}
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                className="bg-[#205FFF] text-white px-16 py-2 rounded-lg hover:bg-blue-600">
                 Continue
               </button>
             :
             buttonLoading ?
               <button
-                className="bg-blue-500 text-white px-16 py-2 rounded-lg hover:bg-blue-600">
+                className="bg-[#205FFF] text-white px-16 py-2 rounded-lg hover:bg-blue-600">
                 Loading
               </button>
               :
               <button onClick={initiateCCTransaction}
-                className="bg-blue-500 text-white px-16 py-2 rounded-lg hover:bg-blue-600">
+                className="bg-[#205FFF] text-white px-16 py-2 rounded-lg hover:bg-blue-600">
                 Continue
               </button>
           }

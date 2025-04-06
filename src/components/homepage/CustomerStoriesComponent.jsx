@@ -66,9 +66,9 @@ const Carousel = () => {
                 />
               </div>
               <div className="w-2/3 p-4 text-[#FFC92E]">
-                <h3 className="text-xl font-semibold mb-1">{slide.title}</h3>
-                <h4 className="text-lg font-medium mb-2">{slide.subtitle}</h4>
-                <p className="text-[11px]">{slide.content}</p>
+                <h3 className="text-xl font-semibold mb-1 font-montserrat">{slide.title}</h3>
+                <h4 className="text-lg font-medium mb-2 font-montserrat">{slide.subtitle}</h4>
+                <p className="text-[11px] font-openSans font-semibold">{slide.content}</p>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Constants } from '../../lib/const/constants';
 import getCurrencySymbol from '../../lib/currenyUtils';
 import InfiniteScroll from 'react-infinite-scroll-component';
-// import { FiArrowDownLeft, FiArrowUpRight } from 'react-icons/fi';
+import { FiArrowDownLeft, FiArrowUpRight } from 'react-icons/fi';
 import { MdOutlineCurrencyExchange } from 'react-icons/md';
 
 import { PrimaryButton } from '../../components/button';
@@ -1015,18 +1015,12 @@ function Transaction({ filtercurrency }) {
                         <div className="flex items-center space-x-2">
                           <div className={`flex items-center justify-center w-10 h-10 rounded-full ${color}`}>
                             {beneficiary.type == 'debit' ?
-                            <>
-                              {/* <FiArrowUpRight fontSize="25px" /> */}
-                              DR
-                              </>
+                              <FiArrowUpRight fontSize="25px" />
                               :
                               beneficiary.type == null || beneficiary.type == "" || beneficiary.type == "individual" ?
                                 <MdOutlineCurrencyExchange fontSize="25px" />
                                 :
-                                <>
-                                CR 
-                                {/* <FiArrowDownLeft fontSize="25px" /> */}
-                                </>
+                                <FiArrowDownLeft fontSize="25px" />
                             }
                           </div>
 

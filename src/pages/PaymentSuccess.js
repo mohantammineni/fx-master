@@ -9,7 +9,7 @@ function PaymentSuccess() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg py-28">
+    <div className="bg-white pt-14">
       <div className="flex justify-center items-center mb-4">
         <div className="w-44 h-44 bg-green-500 rounded-full flex items-center justify-center">
           <FaCheck className="text-white text-6xl" />

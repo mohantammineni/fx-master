@@ -29,12 +29,13 @@ function SelectCurrencyForBeneficiary() {
         loadCountries()
     }, [])
     return (
-        <div className="my-2">
-            <span className="text-lg font-semibold">Select Currency</span>
-            <div className='p-10 text-center'>
+        <div className="flex items-center justify-center w-full h-full bg-white p-4">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
+            <h2 className="text-center font-semibold text-lg mb-4">Select Country</h2>
+            <div className='text-center'>
                 {loading ? "loading..." :
                     <select
-                        className="bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        className="bg-[#EAEAEA] w-full border-none text-gray-900 text-sm rounded-lg px-4 py-2 cursor-pointer flex justify-between items-center focus:outline-none focus:ring-0 focus:border-none"
                         onChange={(e)=>{
                             var data = (e.target.value).split("_");
                             setcurrency(data[0])
@@ -43,7 +44,7 @@ function SelectCurrencyForBeneficiary() {
                     >
                         <option key={0}
                             value={''}>
-                            Select
+                            Select Country
                         </option>
                         {countries.map((countryRow) => {
                             return (
@@ -58,10 +59,31 @@ function SelectCurrencyForBeneficiary() {
                     </select>
                 }
                 <PrimaryButton 
-                label={'Proceed'}
-                style={{width:"20%",marginTop:10}}
-                onClick={()=>navigate('/BeneficiaryTypes',{state:{currency:currency,currencyid:currencyId,transferflowamount:0,balance:0,routeName:'ListBeneficiaries'}})}
-                />
+  className="w-full "
+  label={'Proceed'}
+  disabled={!currency}
+  style={{
+    width: "100%",
+    backgroundColor: currency ? "#4F46E5" : "#A5B4FC",
+    color: "white",
+    padding: "12px",
+    borderRadius: "6px",
+    cursor: currency ? "pointer" : "not-allowed",
+    transition: "background-color 0.3s ease",
+    marginTop: "20px"
+  }}
+  onClick={() => navigate('/BeneficiaryTypes', {
+    state: {
+      currency: currency,
+      currencyid: currencyId,
+      transferflowamount: 0,
+      balance: 0,
+      routeName: 'ListBeneficiaries'
+    }
+  })}
+/>
+
+            </div>
             </div>
         </div>
     );

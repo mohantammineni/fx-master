@@ -51,7 +51,7 @@ export const countryData = [
 ];
 
 export const getCountryInfo = (countryCode, flagConfig = {}) => {
-  const country = countryData.find((c) => c.code === countryCode.toUpperCase());
+  const country = countryData.find((c) => c.code === countryCode?.toUpperCase());
 
   if (country) {
     if (country.flag.component) {
