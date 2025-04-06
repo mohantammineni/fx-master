@@ -59,8 +59,7 @@ function SelfAccount() {
             "beneficiary_company_name": bankDetails.beneficiary_company_name,
             "beneficiary_postcode": bankDetails.beneficiary_postcode
         }
-        
-        if (currencyid == 231 && defaultBank == 'Clear Bank as Service' && (beneCountry == 'UK' || beneCountry == 'GB')) {
+        if (currencyid == 231 && defaultBank == 'Clear Bank as Service' && beneCountry == 'UK') {
 
             obj = ({
                 "workspace_id": workspaceId,
@@ -205,25 +204,25 @@ function SelfAccount() {
             <div className='my-3 mx-1 flex'>
                 {countries.length > 0 && currencyid != 105 &&
                     (<select
-                        className="pl-8 w-1/4 p-2 outline-none rounded-md bg-[#EAEAEA] w-full text-[#205FFF]"
+                        className="pl-8 w-1/4 p-2 pr-4 outline-none rounded-md bg-[#EAEAEA] w-full text-slate-700"
                         onChange={(e) => {
                             setbeneCountry(e.target.value)
                             getBeneFields(beneType, e.target.value)
                         }}
                     >
-                        <option key={0}>---Select Country---</option>
+                        <option key={0} className='text-slate-700'>---Select Country---</option>
                         {countries[0].length > 0 && countries[0].map(resp => {
                             return (
-                                <option key={resp.id} value={resp.code}>{resp.name}</option>
+                                <option key={resp.id} value={resp.code} className='text-slate-700'>{resp.name}</option>
                             )
                         })}
                     </select>)}
             </div>
             {currencyid != 105 ?
                 currencyid == 231 ?
-                    beneCountry != 'UK' && beneCountry != 'GB') ?
+                    beneCountry != 'UK' ?
                         <div className='my-3 mx-1 flex'>
-                            <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF]" onChange={(e) => {
+                            <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-slate-700" onChange={(e) => {
                                 if (e.target.value == 'priority') {
                                     getBeneFields('priority', beneCountry)
                                 }
@@ -231,14 +230,14 @@ function SelfAccount() {
                                     getBeneFields('regular', beneCountry)
                                 }
                             }}>
-                                <option value={'regular'}>Regular</option>
-                                <option value={'priority'}>Priority</option>
+                                <option value={'regular'} className='text-slate-700'>Regular</option>
+                                <option value={'priority'} className='text-slate-700'>Priority</option>
                             </select>
                         </div>
                         : ''
                     :
                     <div className='my-3 mx-1 flex'>
-                        <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF]" onChange={(e) => {
+                        <select className="pl-8 w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-slate-700" onChange={(e) => {
                             if (e.target.value == 'priority') {
                                 getBeneFields('priority', beneCountry)
                             }
@@ -246,8 +245,8 @@ function SelfAccount() {
                                 getBeneFields('regular', beneCountry)
                             }
                         }}>
-                            <option value={'regular'}>Regular</option>
-                            <option value={'priority'}>Priority</option>
+                            <option value={'regular'} className='text-slate-700'>Regular</option>
+                            <option value={'priority'} className='text-slate-700'>Priority</option>
                         </select>
                     </div>
                 :
@@ -262,7 +261,7 @@ function SelfAccount() {
                             type={field.type}
                             required={field.is_required}
                             placeholder={field.label}
-                            className="pl-8  w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-[#205FFF] placeholder:text-sm placeholder:text-slate-700"
+                            className="pl-8  w-1/4 p-2 outline-none bg-[#EAEAEA] w-full rounded-md text-slate-700 placeholder:text-sm placeholder:text-slate-700"
                             onChange={(e) => {
                                 setbankDetails({ ...bankDetails, [formKeys[index]]: e.target.value })
                             }}
